@@ -109,25 +109,45 @@ class TransportAgent:
         destination_longitude: float,
     ) -> dict[str, Any]:
         try:
-            headers = {}
+            headers: dict[str, str] = {}
             if self.onemap_access_token:
                 headers["Authorization"] = self.onemap_access_token
 
-            async with httpx.AsyncClient(timeout=10.0) as client:
+            params = {
+                "start": f"{user_latitude},{user_longitude}",
+                "end": f"{destination_latitude},{destination_longitude}",
+                "routeType": "pt",
+                "date": datetime.now().strftime("%m-%d-%Y"),
+                "time": datetime.now().strftime("%H:%M:%S"),
+                "mode": "TRANSIT",
+                "maxWalkDistance": "800",
+                "numItineraries": "1",
+            }
+
+            async with httpx.AsyncClient(timeout=20.0, follow_redirects=True) as client:
                 response = await client.get(
                     "https://www.onemap.gov.sg/api/public/routingsvc/route",
                     headers=headers,
-                    params={
-                        "start": f"{user_latitude},{user_longitude}",
-                        "end": f"{destination_latitude},{destination_longitude}",
-                        "routeType": "pt",
-                        "date": datetime.now().strftime("%m-%d-%Y"),
-                        "time": datetime.now().strftime("%H:%M:%S"),
-                        "mode": "TRANSIT",
-                        "maxWalkDistance": "800",
-                        "numItineraries": "1",
-                    },
+                    params=params,
                 )
+
+                if (
+                    response.status_code == 401
+                    and self.onemap_access_token
+                    and not self.onemap_access_token.lower().startswith("bearer ")
+                ):
+                    response = await client.get(
+                        "https://www.onemap.gov.sg/api/public/routingsvc/route",
+                        headers={"Authorization": f"Bearer {self.onemap_access_token}"},
+                        params=params,
+                    )
+
+                if response.is_error:
+                    print(
+                        "OneMap route HTTP error "
+                        f"{response.status_code} [SIMULATED fallback]: "
+                        f"{response.text[:500]}"
+                    )
                 response.raise_for_status()
                 data = response.json()
 
@@ -156,10 +176,14 @@ class TransportAgent:
                 "firstDeparture": first_departure,
                 "interchange": self._interchange_label(transit_legs),
                 "label": f"{duration_mins} min via {route_name} ({walk_m}m walk)",
+                "nearestStopFromRoute": self._route_stop_label(transit_legs),
                 "source": "LIVE",
             }
         except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError) as exc:
-            print(f"OneMap route request failed [SIMULATED fallback]: {exc}")
+            print(
+                "OneMap route request failed [SIMULATED fallback]: "
+                f"{type(exc).__name__}: {exc!r}"
+            )
             return {"source": "SIMULATED"}
 
     async def _fetch_nearest_lta_stop(
@@ -225,6 +249,19 @@ class TransportAgent:
             return "No interchange"
 
         return f"Interchange via {' -> '.join(unique_routes)}"
+
+    def _route_stop_label(self, transit_legs: list[dict[str, Any]]) -> str:
+        if not transit_legs:
+            return "Walk"
+
+        first_leg = transit_legs[0]
+        from_stop = first_leg.get("from")
+        if isinstance(from_stop, dict):
+            name = from_stop.get("name")
+            if name:
+                return str(name)
+
+        return str(first_leg.get("routeShortName", "Transit stop"))
 
     def _haversine_meters(self, lat1: float, lon1: float, lat2: float, lon2: float) -> float:
         radius = 6_371_000

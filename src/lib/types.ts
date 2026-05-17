@@ -6,8 +6,8 @@ export interface Drop {
   dropTime: string
   queueOpen: string
   estimatedWait: string
-  currentSlot: number
-  totalSlots: number
+  currentSlot: number | null
+  totalSlots: number | null
   status: "hot" | "filling" | "available"
   imagePlaceholderColor: string
   latitude?: number | null
@@ -19,8 +19,6 @@ export interface Drop {
 export interface Stat {
   id: string
   value: string
-  numericValue: number
-  suffix: string
   label: string
 }
 
@@ -34,7 +32,7 @@ export interface Step {
 export interface UserLocation {
   latitude: number
   longitude: number
-  source: "LIVE" | "SIMULATED"
+  source: "LIVE" | "SIMULATED" | "SIMULATED - permission denied"
 }
 
 export interface QueueOptimization {
@@ -57,4 +55,20 @@ export interface SecureSlotResponse {
   drop: Drop
   optimization: QueueOptimization
   agentLog: string[]
+}
+
+export interface AccountTicket {
+  id: string
+  dropId: string
+  brand: string
+  dropName: string
+  location: string
+  slotNumber: number
+  arriveBy: string
+  leaveAt: string
+  transport: string
+  weather: string
+  sourceUrl?: string | null
+  sourceLabel?: string | null
+  confirmedAt: string
 }

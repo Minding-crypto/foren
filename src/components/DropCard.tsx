@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 interface DropCardProps {
   drop: Drop
   index: number
-  onSecureSlot: (dropId: string) => void
+  onSecureSlot: (drop: Drop) => void
 }
 
 const statusLabel: Record<Drop["status"], string> = {
@@ -21,7 +21,15 @@ const statusLabel: Record<Drop["status"], string> = {
 }
 
 export function DropCard({ drop, index, onSecureSlot }: DropCardProps) {
-  const progress = Math.min((drop.currentSlot / drop.totalSlots) * 100, 100)
+  const currentSlot = drop.currentSlot
+  const totalSlots = drop.totalSlots
+  const hasCapacity =
+    typeof currentSlot === "number" &&
+    typeof totalSlots === "number" &&
+    totalSlots > 0
+  const progress = hasCapacity
+    ? Math.min((currentSlot / totalSlots) * 100, 100)
+    : 0
 
   return (
     <motion.div
@@ -64,12 +72,15 @@ export function DropCard({ drop, index, onSecureSlot }: DropCardProps) {
                 Queue progress
               </span>
               <span className="font-medium text-[var(--text-primary)]">
-                {drop.currentSlot}/{drop.totalSlots}
+                {hasCapacity ? `${currentSlot}/${totalSlots}` : "Source verified"}
               </span>
             </div>
             <div className="h-1 overflow-hidden rounded-full bg-[var(--bg-surface)]">
               <div
-                className={cn("h-full rounded-full bg-[var(--accent)]", progress < 8 && "min-w-1")}
+                className={cn(
+                  "h-full rounded-full bg-[var(--accent)]",
+                  hasCapacity && progress < 8 && "min-w-1"
+                )}
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -89,9 +100,9 @@ export function DropCard({ drop, index, onSecureSlot }: DropCardProps) {
           <Button
             type="button"
             className="mt-7 w-full"
-            onClick={() => onSecureSlot(drop.id)}
+            onClick={() => onSecureSlot(drop)}
           >
-            Secure My Slot →
+            Secure My Slot -&gt;
           </Button>
         </CardContent>
       </Card>

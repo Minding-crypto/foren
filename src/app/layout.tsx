@@ -3,11 +3,11 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "QueueGod | AI Queue Agents for Singapore Drops",
+  title: "QueueForMe | AI Queue Agents for Singapore Drops",
   description:
-    "QueueGod eliminates overnight physical queuing for hyped product drops in Singapore with AI agents that optimize your arrival time.",
+    "QueueForMe eliminates overnight physical queuing for hyped product drops in Singapore with AI agents that optimize your arrival time.",
   keywords: [
-    "QueueGod",
+    "QueueForMe",
     "Singapore queues",
     "AI agent platform",
     "product drops",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "transport app"
   ],
   openGraph: {
-    title: "QueueGod | Never Queue Overnight Again",
+    title: "QueueForMe | Never Queue Overnight Again",
     description:
       "AI agents analyze location, MRT timings, and weather to secure your queue slot for Singapore product drops.",
     type: "website",

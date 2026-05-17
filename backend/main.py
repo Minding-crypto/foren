@@ -6,11 +6,12 @@ from contextlib import asynccontextmanager
 from typing import Any, Literal
 
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from agents import DropAgent, QueueAgent, TransportAgent, WeatherAgent
+from check_env import print_environment_report
 from scraper import refresh_loop
 
 load_dotenv()
@@ -18,6 +19,7 @@ load_dotenv()
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    print_environment_report()
     task = asyncio.create_task(refresh_loop())
     try:
         yield
@@ -30,7 +32,7 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(
-    title="QueueGod API",
+    title="QueueForMe API",
     description="AI agent API for Singapore product-drop queue optimization.",
     version="1.0.0",
     lifespan=lifespan,
@@ -50,6 +52,8 @@ transport_agent = TransportAgent()
 weather_agent = WeatherAgent()
 queue_agent = QueueAgent()
 slot_assignments: dict[str, int] = {}
+released_slots: dict[str, list[int]] = {}
+confirmed_slots: dict[str, set[int]] = {}
 
 
 class Drop(BaseModel):
@@ -60,8 +64,8 @@ class Drop(BaseModel):
     dropTime: str
     queueOpen: str
     estimatedWait: str
-    currentSlot: int
-    totalSlots: int
+    currentSlot: int | None = None
+    totalSlots: int | None = None
     status: Literal["hot", "filling", "available"]
     imagePlaceholderColor: str
     latitude: float | None = None
@@ -73,12 +77,17 @@ class Drop(BaseModel):
 class UserLocation(BaseModel):
     latitude: float
     longitude: float
-    source: Literal["LIVE", "REAL", "SIMULATED"]
+    source: Literal["LIVE", "REAL", "SIMULATED", "SIMULATED - permission denied"]
 
 
 class SecureSlotRequest(BaseModel):
     drop_id: str = Field(alias="dropId")
     user_location: UserLocation = Field(alias="userLocation")
+
+
+class SlotActionRequest(BaseModel):
+    drop_id: str = Field(alias="dropId")
+    slot_number: int = Field(alias="slotNumber", ge=1)
 
 
 class QueueOptimization(BaseModel):
@@ -116,7 +125,17 @@ async def list_drops_alias() -> list[dict[str, Any]]:
 @app.post("/api/secure-slot", response_model=SecureSlotResponse)
 async def secure_api_slot(request: SecureSlotRequest) -> dict[str, Any]:
     drop = drop_agent.get_drop(request.drop_id)
-    slot_number = _assign_slot(str(drop["id"]), int(drop["currentSlot"]))
+    if drop is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Drop not found. Live discovery has no verified drop for this id.",
+        )
+
+    starting_slot = drop.get("currentSlot")
+    slot_number = _assign_slot(
+        str(drop["id"]),
+        starting_slot if isinstance(starting_slot, int) and starting_slot > 0 else 1,
+    )
     transport = await transport_agent.plan_route(
         request.user_location.latitude,
         request.user_location.longitude,
@@ -133,12 +152,57 @@ async def secure_api_slot(request: SecureSlotRequest) -> dict[str, Any]:
     }
 
 
+@app.post("/api/optimize", response_model=SecureSlotResponse)
+async def optimize_alias(request: SecureSlotRequest) -> dict[str, Any]:
+    return await secure_api_slot(request)
+
+
 @app.post("/secure-slot", response_model=SecureSlotResponse)
 async def secure_slot_alias(request: SecureSlotRequest) -> dict[str, Any]:
     return await secure_api_slot(request)
 
 
+@app.post("/api/confirm-slot")
+async def confirm_api_slot(request: SlotActionRequest) -> dict[str, str | int]:
+    confirmed_slots.setdefault(request.drop_id, set()).add(request.slot_number)
+    print(
+        f"Confirmed slot #{request.slot_number} for {request.drop_id} "
+        "[LIVE] persisted this session"
+    )
+    return {
+        "status": "confirmed",
+        "dropId": request.drop_id,
+        "slotNumber": request.slot_number,
+    }
+
+
+@app.post("/api/release-slot")
+async def release_api_slot(request: SlotActionRequest) -> dict[str, str | int]:
+    confirmed_slots.setdefault(request.drop_id, set()).discard(request.slot_number)
+    released_for_drop = released_slots.setdefault(request.drop_id, [])
+
+    if request.slot_number not in released_for_drop:
+        released_for_drop.append(request.slot_number)
+        released_for_drop.sort()
+
+    print(
+        f"Released slot #{request.slot_number} for {request.drop_id} "
+        "[LIVE] available again this session"
+    )
+    return {
+        "status": "released",
+        "dropId": request.drop_id,
+        "slotNumber": request.slot_number,
+    }
+
+
 def _assign_slot(drop_id: str, starting_slot: int) -> int:
+    released_for_drop = released_slots.get(drop_id, [])
+    if released_for_drop:
+        next_slot = released_for_drop.pop(0)
+        print(f"Reassigned released slot #{next_slot} for {drop_id} [LIVE]")
+        return next_slot
+
     previous_slot = slot_assignments.get(drop_id, starting_slot - 1)
     next_slot = previous_slot + 1
     slot_assignments[drop_id] = next_slot
@@ -153,12 +217,16 @@ def _build_agent_log(
     weather: dict[str, str | int],
     optimization: dict[str, Any],
 ) -> list[str]:
-    location_status = "[LIVE]" if request.user_location.source in {"LIVE", "REAL"} else "[SIMULATED]"
+    location_status = (
+        "[LIVE]"
+        if request.user_location.source in {"LIVE", "REAL"}
+        else f"[{request.user_location.source}]"
+    )
     route_status = "[LIVE]" if transport.get("source") == "LIVE" else "[SIMULATED]"
     lta_status = "[LIVE]" if transport.get("ltaSource") == "LIVE" else "[SIMULATED]"
     weather_status = "[LIVE]" if weather.get("source") == "LIVE" else "[SIMULATED]"
 
-    return [
+    log = [
         (
             "GPS acquired: "
             f"{request.user_location.latitude:.4f} N, "
@@ -168,7 +236,17 @@ def _build_agent_log(
             "OneMap route: "
             f"{optimization['travelMinutes']} min via {transport['line']} {route_status}"
         ),
-        f"LTA nearest stop: {transport['nearestStop']} {lta_status}",
-        f"Weather at {drop['location']}: {weather['weather']} {weather_status}",
-        f"Slot #{str(optimization['slotNumber']).zfill(2)} assigned [LIVE] persisted this session",
     ]
+
+    if transport.get("source") == "LIVE" and transport.get("nearestStopFromRoute"):
+        log.append(f"Transit start from OneMap route: {transport['nearestStopFromRoute']} [LIVE]")
+    elif transport.get("ltaSource") == "LIVE":
+        log.append(f"LTA nearest stop: {transport['nearestStop']} {lta_status}")
+
+    log.extend(
+        [
+            f"Weather at {drop['location']}: {weather['weather']} {weather_status}",
+            f"Slot #{str(optimization['slotNumber']).zfill(2)} assigned [LIVE] persisted this session",
+        ]
+    )
+    return log

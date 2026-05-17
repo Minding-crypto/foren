@@ -6,9 +6,9 @@ export function Footer() {
           <a
             href="#top"
             className="font-display text-xl font-bold tracking-normal text-white"
-            aria-label="QueueGod home"
+            aria-label="QueueForMe home"
           >
-            QueueGod
+            QueueForMe
           </a>
           <p className="mt-2 text-sm text-[var(--text-muted)]">
             Queue smarter. Live better.
@@ -24,7 +24,7 @@ export function Footer() {
               Terms
             </a>
           </div>
-          <p>© 2025 QueueGod</p>
+          <p>© 2025 QueueForMe</p>
         </div>
       </div>
     </footer>

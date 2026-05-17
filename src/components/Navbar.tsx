@@ -33,9 +33,9 @@ export function Navbar() {
         <a
           href="#top"
           className="font-display text-xl font-bold tracking-normal text-[var(--text-primary)]"
-          aria-label="QueueGod home"
+          aria-label="QueueForMe home"
         >
-          QueueGod
+          QueueForMe
         </a>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -44,6 +44,12 @@ export function Navbar() {
             className="text-sm font-medium text-[var(--text-secondary)] transition hover:text-white"
           >
             How it works
+          </a>
+          <a
+            href="#account"
+            className="text-sm font-medium text-[var(--text-secondary)] transition hover:text-white"
+          >
+            Account
           </a>
           <Button asChild>
             <a href="#drops">Get Early Access</a>
@@ -94,6 +100,13 @@ export function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               How it works
+            </a>
+            <a
+              href="#account"
+              className="text-sm font-medium text-[var(--text-secondary)]"
+              onClick={() => setIsOpen(false)}
+            >
+              Account
             </a>
             <Button asChild className="w-full">
               <a href="#drops" onClick={() => setIsOpen(false)}>

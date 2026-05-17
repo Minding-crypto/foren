@@ -10,8 +10,6 @@ from typing import Any
 
 from openai import AsyncOpenAI
 
-from agents.mock_data import DROPS
-
 DATA_DIR = Path(__file__).resolve().parent / "data"
 LIVE_DROPS_PATH = DATA_DIR / "live_drops.json"
 REFRESH_SECONDS = 6 * 60 * 60
@@ -34,7 +32,7 @@ async def refresh_live_drops() -> list[dict[str, Any]]:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     if not os.getenv("OPENAI_API_KEY"):
-        print("OPENAI_API_KEY missing; live drop discovery uses hardcoded fallback [SIMULATED]")
+        print("OPENAI_API_KEY missing; live drop discovery is unavailable [SIMULATED]")
         if not LIVE_DROPS_PATH.exists():
             LIVE_DROPS_PATH.write_text("[]", encoding="utf-8")
         return []
@@ -84,7 +82,7 @@ date/time, and source URL. Return strict JSON only, no markdown, matching:
         print(f"Live drop discovery refreshed {len(live_drops)} drops [LIVE web_search]")
         return live_drops
     except Exception as exc:
-        print(f"Live drop discovery failed; using fallback drops [SIMULATED]: {exc}")
+        print(f"Live drop discovery failed; no unverified fallback drops served [SIMULATED]: {exc}")
         if not LIVE_DROPS_PATH.exists():
             LIVE_DROPS_PATH.write_text("[]", encoding="utf-8")
         return []
@@ -150,4 +148,5 @@ def _status(value: Any) -> str:
 
 
 def _fallback_drop_time(index: int) -> str:
-    return DROPS[(index - 1) % len(DROPS)]["dropTime"]
+    hour = 9 + ((index - 1) % 4)
+    return f"{hour}:00 AM"

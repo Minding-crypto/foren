@@ -1,10 +1,39 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
+import { getDrops } from "@/lib/api"
+import type { Drop } from "@/lib/types"
 
 export function HeroSection() {
+  const [featuredDrop, setFeaturedDrop] = useState<Drop | null>(null)
+  const [activeCount, setActiveCount] = useState(0)
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadFeaturedDrop() {
+      const drops = await getDrops()
+
+      if (!isMounted) {
+        return
+      }
+
+      setActiveCount(drops.length)
+      setFeaturedDrop(
+        drops.find((drop) => drop.status === "hot") ?? drops[0] ?? null
+      )
+    }
+
+    loadFeaturedDrop()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <section
       id="top"
@@ -20,21 +49,17 @@ export function HeroSection() {
           Never Queue Overnight Again.
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-8 text-white/65 sm:text-xl">
-          QueueGod&apos;s AI agents analyze your location, MRT timings, and weather
-          in real-time - then secure your queue slot and tell you exactly when to
-          leave. You just show up.
+          QueueForMe analyzes your location, transit options, and weather in
+          real time - then tells you exactly when to leave for active drops.
         </p>
         <div className="mt-9 flex flex-col gap-4 sm:flex-row">
           <Button size="lg" asChild>
             <a href="#drops">Optimize My Queue</a>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="#how-it-works">See How It Works</a>
+            <a href="#account">View Account</a>
           </Button>
         </div>
-        <p className="mt-6 text-sm font-medium text-[var(--text-secondary)]">
-          2,400+ Singaporeans already queue smarter
-        </p>
       </motion.div>
 
       <motion.div
@@ -46,33 +71,48 @@ export function HeroSection() {
         <div className="overflow-hidden rounded-xl border border-[color:var(--border)] bg-[var(--bg-card)] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.3)]">
           <div className="flex items-center justify-between gap-4">
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-[var(--text-muted)]">
-              Your queue slot
+              Featured live drop
             </p>
             <div className="rounded-lg border border-[var(--accent)]/35 bg-[var(--accent-subtle)] px-3 py-1.5 text-xs font-medium text-[var(--accent)]">
-              AI Secured
+              {activeCount > 0 ? `${activeCount} active` : "Loading"}
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-[1fr_auto] items-end gap-6">
-            <div>
-              <p className="text-sm font-medium text-[var(--text-muted)]">Position</p>
-              <p className="font-mono text-7xl font-semibold leading-none text-white">
-                #07
-              </p>
-            </div>
-            <div className="pb-1 text-right">
-              <p className="text-sm font-medium text-[var(--text-muted)]">Arrive by</p>
-              <p className="font-display text-2xl font-semibold text-[var(--accent)]">
-                09:45 AM
-              </p>
-            </div>
-          </div>
+          {featuredDrop ? (
+            <>
+              <div className="mt-8 grid gap-2">
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                  {featuredDrop.brand}
+                </p>
+                <h2 className="font-display text-3xl font-semibold leading-tight text-white">
+                  {featuredDrop.name}
+                </h2>
+                <p className="text-sm leading-6 text-[var(--text-secondary)]">
+                  {featuredDrop.location}
+                </p>
+              </div>
 
-          <div className="mt-7 divide-y divide-[color:var(--border)] border-t border-[color:var(--border)]">
-            <TicketRow label="Drop" value="Swatch Royal Pop - ION Orchard" />
-            <TicketRow label="Transport" value="Circle Line to Orchard, 4 min wait" />
-            <TicketRow label="Weather" value="Light rain - umbrella advised" />
-          </div>
+              <div className="mt-7 divide-y divide-[color:var(--border)] border-t border-[color:var(--border)]">
+                <TicketRow label="Drop time" value={featuredDrop.dropTime} />
+                <TicketRow label="Queue opens" value={featuredDrop.queueOpen} />
+                <TicketRow label="Queue status" value={queueStatus(featuredDrop)} />
+                <TicketRow label="Source" value={featuredDrop.sourceLabel ?? "Verified source"} />
+              </div>
+
+              <Button type="button" className="mt-6 w-full" asChild>
+                <a href="#drops">Secure this drop</a>
+              </Button>
+            </>
+          ) : (
+            <div className="mt-8 rounded-xl border border-[color:var(--border)] bg-[var(--bg-surface)] p-5">
+              <p className="font-display text-xl font-semibold text-white">
+                Loading live drops
+              </p>
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
+                Pulling verified Singapore drops from the backend.
+              </p>
+            </div>
+          )}
         </div>
       </motion.div>
     </section>
@@ -88,4 +128,16 @@ function TicketRow({ label, value }: { label: string; value: string }) {
       <span className="text-sm font-medium text-[var(--text-primary)]">{value}</span>
     </div>
   )
+}
+
+function queueStatus(drop: Drop) {
+  if (
+    typeof drop.currentSlot === "number" &&
+    typeof drop.totalSlots === "number" &&
+    drop.totalSlots > 0
+  ) {
+    return `${drop.currentSlot}/${drop.totalSlots} available today`
+  }
+
+  return drop.estimatedWait
 }
