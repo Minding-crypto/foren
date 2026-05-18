@@ -127,6 +127,52 @@ const certificateGates = [
   }
 ]
 
+const trustBenchmarks = [
+  {
+    name: "Known-rule tasks",
+    result: "decision accuracy",
+    detail: "Synthetic loan, hiring, blocker, and threshold prompts where the correct output is declared before the test."
+  },
+  {
+    name: "Circuit certification rate",
+    result: "proof yield",
+    detail: "How often Holmes can pass the full sufficiency, necessity, minimality, and negative-control gate."
+  },
+  {
+    name: "False-positive controls",
+    result: "random nodes fail",
+    detail: "Random same-size internal node sets must not restore the decision like the selected circuit does."
+  },
+  {
+    name: "Version regression",
+    result: "drift caught",
+    detail: "The same benchmark suite is rerun after model, prompt, RAG, or policy changes."
+  }
+]
+
+const negativeControls = [
+  {
+    check: "Same-size random circuits",
+    pass: "random recovery p95 stays below the selected circuit",
+    reason: "proves the result is not just any patch from any layer"
+  },
+  {
+    check: "Wrong-target decision",
+    pass: "APPROVE circuit should not certify DENY",
+    reason: "proves the circuit is decision-specific"
+  },
+  {
+    check: "Shuffled prompt labels",
+    pass: "certificate fails when the rule labels are scrambled",
+    reason: "proves the evidence is not a formatting artifact"
+  },
+  {
+    check: "Minimality knock-out",
+    pass: "removing a selected node weakens recovery",
+    reason: "proves every certified node earns its place"
+  }
+]
+
 const circuitNodes = [
   {
     site: "Layer 9, token 65",
@@ -409,6 +455,9 @@ export default function Home() {
             <a className="text-sm text-[var(--text-secondary)] hover:text-white" href="#certificate">
               Certificate
             </a>
+            <a className="text-sm text-[var(--text-secondary)] hover:text-white" href="#trust">
+              Trust
+            </a>
             <a className="text-sm text-[var(--text-secondary)] hover:text-white" href="#regulation">
               Regulation
             </a>
@@ -570,7 +619,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="certificate" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
+      <section id="certificate" className="scroll-mt-20 border-b border-white/10 bg-[var(--bg-surface)] py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <h2 className="font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
@@ -623,7 +672,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="math" className="border-b border-white/10 py-24">
+      <section id="math" className="scroll-mt-20 border-b border-white/10 py-24">
         <div className="section-shell">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-2)]">
@@ -660,7 +709,85 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="interventions" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
+      <section id="trust" className="scroll-mt-20 border-b border-white/10 bg-[var(--bg-surface)] py-24">
+        <div className="section-shell">
+          <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                Trust stack
+              </p>
+              <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+                We do not ask buyers to trust Holmes. We make Holmes test itself.
+              </h2>
+              <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
+                Every strong certificate now runs against negative controls.
+                If random internal nodes can pass the same proof, the certificate
+                is rejected. If a synthetic benchmark exposes drift or false
+                positives, the public validation score drops.
+              </p>
+              <div className="mt-6 rounded-md border border-[var(--accent)]/30 bg-[rgba(95,201,176,0.08)] p-5">
+                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+                  Product promise
+                </p>
+                <p className="mt-3 text-xl font-semibold leading-8 text-white">
+                  No negative-control pass, no causal circuit certificate.
+                </p>
+              </div>
+            </div>
+
+            <div className="audit-surface">
+              <div className="border-b border-white/10 p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                  Benchmark validation suite
+                </p>
+                <h3 className="mt-2 font-display text-2xl font-semibold text-white">
+                  Accuracy is reported as measured performance, not marketing.
+                </h3>
+              </div>
+              <div className="grid gap-px bg-white/10 md:grid-cols-2">
+                {trustBenchmarks.map((item) => (
+                  <article key={item.name} className="bg-[var(--bg-card)] p-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                      {item.result}
+                    </p>
+                    <h4 className="mt-3 font-display text-2xl font-semibold text-white">
+                      {item.name}
+                    </h4>
+                    <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
+                      {item.detail}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {negativeControls.map((control) => (
+              <article key={control.check} className="grid min-h-[228px] rounded-md border border-white/10 bg-[var(--bg-card)] p-5">
+                <div>
+                  <span className="rounded-md border border-[var(--danger)]/35 bg-[rgba(227,106,92,0.09)] px-2 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--danger)]">
+                    negative control
+                  </span>
+                  <h3 className="mt-4 font-display text-xl font-semibold leading-tight text-white">
+                    {control.check}
+                  </h3>
+                </div>
+                <div className="self-end">
+                  <p className="text-sm font-semibold leading-6 text-[var(--accent)]">
+                    Pass condition: {control.pass}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+                    {control.reason}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="interventions" className="scroll-mt-20 border-b border-white/10 bg-[var(--bg-surface)] py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.92fr_1.08fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
@@ -693,7 +820,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="bias-audit" className="border-b border-white/10 py-24">
+      <section id="bias-audit" className="scroll-mt-20 border-b border-white/10 py-24">
         <div className="section-shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--danger)]">
@@ -774,7 +901,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="agents" className="border-b border-white/10 py-24">
+      <section id="agents" className="scroll-mt-20 border-b border-white/10 py-24">
         <div className="section-shell grid gap-12 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-2)]">
@@ -830,7 +957,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="regulation" className="border-b border-white/10 py-24">
+      <section id="regulation" className="scroll-mt-20 border-b border-white/10 py-24">
         <div className="section-shell">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-2)]">
@@ -870,7 +997,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="use-cases" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
+      <section id="use-cases" className="scroll-mt-20 border-b border-white/10 bg-[var(--bg-surface)] py-24">
         <div className="section-shell">
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
@@ -923,7 +1050,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="papers" className="py-24">
+      <section id="papers" className="scroll-mt-20 py-24">
         <div className="section-shell">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-2)]">
