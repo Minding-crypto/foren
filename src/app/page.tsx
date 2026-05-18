@@ -132,28 +132,57 @@ const circuitNodes = [
 
 const biasAuditRows = [
   {
-    group: "Reference proxy",
+    group: "White male-coded baseline",
     delta: "+0.000",
-    flips: "0/8",
+    pAdjusted: "baseline",
+    output: "HIRE",
     verdict: "baseline"
   },
   {
-    group: "Black-name proxy",
-    delta: "-0.428",
-    flips: "2/8",
+    group: "Female-name proxy",
+    delta: "-0.407",
+    pAdjusted: "0.035",
+    output: "HIRE",
     verdict: "flag"
   },
   {
-    group: "East Asian proxy",
-    delta: "-0.037",
-    flips: "0/8",
-    verdict: "ok"
+    group: "Black-name proxy",
+    delta: "-0.462",
+    pAdjusted: "0.058",
+    output: "HIRE",
+    verdict: "watch"
+  },
+  {
+    group: "South Asian proxy",
+    delta: "-0.252",
+    pAdjusted: "0.068",
+    output: "HIRE",
+    verdict: "watch"
   },
   {
     group: "Arab/Muslim proxy",
-    delta: "-0.311",
-    flips: "1/8",
-    verdict: "review"
+    delta: "-0.321",
+    pAdjusted: "0.084",
+    output: "HIRE",
+    verdict: "watch"
+  }
+]
+
+const hiddenPressureStats = [
+  {
+    label: "Visible answer",
+    value: "HIRE",
+    detail: "The model still gives the same final answer."
+  },
+  {
+    label: "Internal margin shift",
+    value: "-0.407",
+    detail: "The probability pressure toward HIRE drops under female-name substitution."
+  },
+  {
+    label: "Corrected p-value",
+    value: "0.035",
+    detail: "The paired test survives FDR correction for the gender proxy audit."
   }
 ]
 
@@ -396,6 +425,10 @@ export default function Home() {
               what information mattered, where the model represented it inside,
               and whether changing those internal signals changes the decision.
             </p>
+            <p className="mt-5 max-w-xl rounded-md border border-[var(--accent)]/30 bg-[rgba(95,201,176,0.08)] p-4 text-base font-semibold leading-7 text-white">
+              New bias finding: the final output can still look correct while
+              the model&apos;s internal decision pressure shifts against a protected proxy.
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#certificate"
@@ -491,10 +524,7 @@ export default function Home() {
       <section id="certificate" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-              Main product
-            </p>
-            <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+            <h2 className="font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
               Decision Proof Certificate.
             </h2>
             <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
@@ -618,51 +648,99 @@ export default function Home() {
         <div className="section-shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--danger)]">
-              Flaw finder
+              Hidden-risk finder
             </p>
             <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              Find when the same facts get a different decision pressure.
+              The answer can look fair while the internals are already shifting.
             </h2>
             <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
-              Holmes can run matched-pair demographic proxy audits: same income,
-              same loan, same employment, same prompt. Only the protected proxy
-              changes. If the model&apos;s approve-vs-deny margin shifts or flips,
+              Holmes can run matched-pair demographic proxy audits: same
+              qualifications, same role, same prompt. Only the protected proxy
+              changes. If the model&apos;s hire-vs-reject margin shifts or flips,
               the report flags potential differential treatment.
             </p>
-            <p className="mt-5 rounded-md border border-white/10 bg-[var(--bg-card)] p-4 text-sm leading-6 text-[var(--text-secondary)]">
-              This is the viral demo: not &quot;the model is racist&quot; as a slogan,
-              but a signed mathematical artifact saying exactly which proxy
-              group moved the margin, by how much, and whether the effect passed
-              a paired permutation test.
+            <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
+              In our Qwen hiring audit, every matched candidate still received
+              the visible answer <span className="font-semibold text-white">HIRE</span>.
+              But the internal hire-vs-reject margin dropped for the female-name
+              proxy and survived FDR correction. The white male-coded baseline
+              shows what the unchanged reference value looks like. Output-only
+              QA would miss that.
             </p>
+            <div className="mt-5 grid gap-3">
+              {hiddenPressureStats.map((stat) => (
+                <div key={stat.label} className="rounded-md border border-white/10 bg-[var(--bg-card)] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                    {stat.label}
+                  </p>
+                  <p className="mt-2 font-display text-3xl font-semibold text-white">
+                    {stat.value}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+                    {stat.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="audit-surface">
             <div className="border-b border-white/10 p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
-                Matched-pair output
+                Matched-pair logit-margin output
               </p>
               <h3 className="mt-2 font-display text-2xl font-semibold text-white">
-                Bias audit certificate
+                Bias pressure certificate
               </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+                Same qualifications. Same prompt. Same visible output. Different internal decision pressure.
+              </p>
             </div>
-            <div className="grid gap-px bg-white/10">
-              {biasAuditRows.map((row) => (
-                <div key={row.group} className="grid gap-3 bg-[var(--bg-card)] p-5 sm:grid-cols-[1fr_90px_80px_80px] sm:items-center">
-                  <p className="font-semibold text-white">{row.group}</p>
-                  <p className="font-mono text-sm text-[var(--text-secondary)]">{row.delta}</p>
-                  <p className="font-mono text-sm text-[var(--text-secondary)]">{row.flips}</p>
-                  <span className={`rounded-md border px-2 py-1 text-center text-xs font-semibold ${
-                    row.verdict === "flag"
-                      ? "border-[var(--danger)]/35 bg-[rgba(227,106,92,0.1)] text-[var(--danger)]"
-                      : row.verdict === "review"
-                        ? "border-[var(--warning)]/35 bg-[rgba(238,182,92,0.1)] text-[var(--warning)]"
-                        : "border-[var(--success)]/35 bg-[rgba(33,196,143,0.09)] text-[var(--success)]"
-                  }`}>
-                    {row.verdict}
-                  </span>
+            <div className="overflow-x-auto">
+              <div className="min-w-[640px]">
+                <div className="grid grid-cols-[minmax(190px,1fr)_86px_92px_78px_86px] gap-px bg-white/10">
+                  {["proxy group", "delta", "FDR p", "output", "verdict"].map((label, index) => (
+                    <div
+                      key={label}
+                      className={`bg-[#0d1110] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)] ${
+                        index === 0 ? "text-left" : "text-center"
+                      }`}
+                    >
+                      {label}
+                    </div>
+                  ))}
                 </div>
-              ))}
+                <div className="grid gap-px bg-white/10">
+                  {biasAuditRows.map((row) => (
+                    <div
+                      key={row.group}
+                      className="grid grid-cols-[minmax(190px,1fr)_86px_92px_78px_86px] items-center gap-px bg-white/10"
+                    >
+                      <p className="bg-[var(--bg-card)] px-5 py-4 font-semibold text-white">{row.group}</p>
+                      <p className="bg-[var(--bg-card)] px-3 py-4 text-center font-mono text-sm text-[var(--text-secondary)]">
+                        {row.delta}
+                      </p>
+                      <p className="bg-[var(--bg-card)] px-3 py-4 text-center font-mono text-sm text-[var(--text-secondary)]">
+                        {row.pAdjusted}
+                      </p>
+                      <p className="bg-[var(--bg-card)] px-3 py-4 text-center font-mono text-sm text-[var(--success)]">
+                        {row.output}
+                      </p>
+                      <div className="bg-[var(--bg-card)] px-3 py-4 text-center">
+                        <span className={`inline-flex min-w-[64px] justify-center rounded-md border px-2 py-1 text-xs font-semibold ${
+                          row.verdict === "flag"
+                            ? "border-[var(--danger)]/35 bg-[rgba(227,106,92,0.1)] text-[var(--danger)]"
+                            : row.verdict === "watch"
+                              ? "border-[var(--warning)]/35 bg-[rgba(238,182,92,0.1)] text-[var(--warning)]"
+                              : "border-[var(--success)]/35 bg-[rgba(33,196,143,0.09)] text-[var(--success)]"
+                        }`}>
+                          {row.verdict}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
