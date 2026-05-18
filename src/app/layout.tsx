@@ -3,23 +3,23 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "QueueForMe | AI Queue Agents for Singapore Drops",
+  title: "Holmes | The Proof Layer for AI Agents",
   description:
-    "QueueForMe eliminates overnight physical queuing for hyped product drops in Singapore with AI agents that optimize your arrival time.",
+    "Holmes turns AI agent decisions and actions into bounded, intervention-tested evidence reports for compliance, audit, and incident review.",
   keywords: [
-    "QueueForMe",
-    "Singapore queues",
-    "AI agent platform",
-    "product drops",
-    "MRT timing",
-    "transport app"
+    "Holmes",
+    "AI audit",
+    "mechanistic interpretability",
+    "LLM compliance",
+    "model governance",
+    "activation patching"
   ],
   openGraph: {
-    title: "QueueForMe | Never Queue Overnight Again",
+    title: "Holmes | The Proof Layer for AI Agents",
     description:
-      "AI agents analyze location, MRT timings, and weather to secure your queue slot for Singapore product drops.",
+      "Bounded, mathematically tested evidence for why an AI agent made a decision or took an action.",
     type: "website",
-    locale: "en_SG"
+    locale: "en_US"
   }
 }
 

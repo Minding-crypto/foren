@@ -95,7 +95,7 @@ export function AccountTickets({ tickets, onReleaseTicket }: AccountTicketsProps
             No locked tickets yet
           </h3>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--text-secondary)]">
-            Secure a live drop, then press "Lock in spot" to save it here.
+            Secure a live drop, then press &quot;Lock in spot&quot; to save it here.
           </p>
         </div>
       )}

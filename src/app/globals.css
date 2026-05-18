@@ -5,23 +5,24 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0F1117;
-  --bg-card: #1A1D27;
-  --bg-surface: #222535;
-  --accent: #3B82F6;
-  --accent-hover: #2563EB;
-  --accent-subtle: rgba(59,130,246,0.1);
-  --text-primary: #F9FAFB;
-  --text-secondary: #9CA3AF;
-  --text-muted: #6B7280;
+  --bg-primary: #0B0D0E;
+  --bg-card: #121716;
+  --bg-surface: #151A18;
+  --accent: #5FC9B0;
+  --accent-hover: #7FD8BF;
+  --accent-2: #EEB65C;
+  --accent-subtle: rgba(95,201,176,0.1);
+  --text-primary: #F4F1EA;
+  --text-secondary: #B7B0A4;
+  --text-muted: #777063;
   --border: rgba(255,255,255,0.07);
-  --success: #10B981;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-  --border-hsl: 225 9% 20%;
-  --background: 224 21% 7%;
+  --success: #21C48F;
+  --warning: #EEB65C;
+  --danger: #E36A5C;
+  --border-hsl: 150 8% 20%;
+  --background: 160 12% 5%;
   --foreground: 210 20% 98%;
-  --primary: 217 91% 60%;
+  --primary: 166 48% 58%;
   --primary-foreground: 0 0% 100%;
   --secondary: 225 20% 17%;
   --secondary-foreground: 210 20% 98%;
@@ -59,4 +60,21 @@ body {
 .section-shell {
   width: min(1120px, calc(100% - 2rem));
   margin-inline: auto;
+}
+
+.forensic-grid {
+  background:
+    linear-gradient(rgba(244, 241, 234, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 234, 0.035) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(95, 201, 176, 0.06), transparent 34%, rgba(238, 182, 92, 0.04)),
+    var(--bg-primary);
+  background-size: 48px 48px, 48px 48px, 100% 100%, auto;
+}
+
+.audit-surface {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(18, 23, 22, 0.92);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
 }

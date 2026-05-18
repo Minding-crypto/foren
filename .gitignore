@@ -8,3 +8,12 @@ dist
 tsconfig.tsbuildinfo
 __pycache__/
 *.pyc
+reports/
+forensic_audit.db
+forensicai_*.json
+forensicai_*.txt
+forensicai_server_ed25519
+forensicai_server_ed25519.pub
+inspect_*.py
+proof_smoke.py
+qwen_*prompt*.txt
