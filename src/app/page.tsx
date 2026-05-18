@@ -696,51 +696,30 @@ export default function Home() {
                 Same qualifications. Same prompt. Same visible output. Different internal decision pressure.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <div className="min-w-[640px]">
-                <div className="grid grid-cols-[minmax(190px,1fr)_86px_92px_78px_86px] gap-px bg-white/10">
-                  {["proxy group", "delta", "FDR p", "output", "verdict"].map((label, index) => (
-                    <div
-                      key={label}
-                      className={`bg-[#0d1110] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)] ${
-                        index === 0 ? "text-left" : "text-center"
-                      }`}
-                    >
-                      {label}
-                    </div>
-                  ))}
-                </div>
-                <div className="grid gap-px bg-white/10">
-                  {biasAuditRows.map((row) => (
-                    <div
-                      key={row.group}
-                      className="grid grid-cols-[minmax(190px,1fr)_86px_92px_78px_86px] items-center gap-px bg-white/10"
-                    >
-                      <p className="bg-[var(--bg-card)] px-5 py-4 font-semibold text-white">{row.group}</p>
-                      <p className="bg-[var(--bg-card)] px-3 py-4 text-center font-mono text-sm text-[var(--text-secondary)]">
-                        {row.delta}
-                      </p>
-                      <p className="bg-[var(--bg-card)] px-3 py-4 text-center font-mono text-sm text-[var(--text-secondary)]">
-                        {row.pAdjusted}
-                      </p>
-                      <p className="bg-[var(--bg-card)] px-3 py-4 text-center font-mono text-sm text-[var(--success)]">
-                        {row.output}
-                      </p>
-                      <div className="bg-[var(--bg-card)] px-3 py-4 text-center">
-                        <span className={`inline-flex min-w-[64px] justify-center rounded-md border px-2 py-1 text-xs font-semibold ${
-                          row.verdict === "flag"
-                            ? "border-[var(--danger)]/35 bg-[rgba(227,106,92,0.1)] text-[var(--danger)]"
-                            : row.verdict === "watch"
-                              ? "border-[var(--warning)]/35 bg-[rgba(238,182,92,0.1)] text-[var(--warning)]"
-                              : "border-[var(--success)]/35 bg-[rgba(33,196,143,0.09)] text-[var(--success)]"
-                        }`}>
-                          {row.verdict}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <div className="grid gap-px bg-white/10">
+              {biasAuditRows.map((row) => (
+                <article key={row.group} className="bg-[var(--bg-card)] p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="font-display text-xl font-semibold leading-tight text-white">
+                      {row.group}
+                    </p>
+                    <span className={`inline-flex min-w-[70px] justify-center rounded-md border px-2 py-1 text-xs font-semibold uppercase tracking-[0.08em] ${
+                      row.verdict === "flag"
+                        ? "border-[var(--danger)]/35 bg-[rgba(227,106,92,0.1)] text-[var(--danger)]"
+                        : row.verdict === "watch"
+                          ? "border-[var(--warning)]/35 bg-[rgba(238,182,92,0.1)] text-[var(--warning)]"
+                          : "border-[var(--success)]/35 bg-[rgba(33,196,143,0.09)] text-[var(--success)]"
+                    }`}>
+                      {row.verdict}
+                    </span>
+                  </div>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    <BiasMetric label="Margin delta" value={row.delta} />
+                    <BiasMetric label="FDR p-value" value={row.pAdjusted} />
+                    <BiasMetric label="Visible output" value={row.output} tone="success" />
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </div>
@@ -927,5 +906,26 @@ function ProofGate({ title, detail }: { title: string; detail: string }) {
       </div>
       <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{detail}</p>
     </article>
+  )
+}
+
+function BiasMetric({
+  label,
+  value,
+  tone = "muted"
+}: {
+  label: string
+  value: string
+  tone?: "muted" | "success"
+}) {
+  return (
+    <div className="rounded-md border border-white/10 bg-black/15 p-3">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--text-muted)]">
+        {label}
+      </p>
+      <p className={`mt-2 font-mono text-base font-semibold ${tone === "success" ? "text-[var(--success)]" : "text-white"}`}>
+        {value}
+      </p>
+    </div>
   )
 }
