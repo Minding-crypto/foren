@@ -76,6 +76,39 @@ const proofChecks = [
   }
 ]
 
+const certificateGates = [
+  {
+    label: "Decision readout",
+    status: "PASS",
+    detail: "The final answer is reduced to an approve-vs-deny logit margin, not a vague text explanation."
+  },
+  {
+    label: "Layer timing",
+    status: "PASS",
+    detail: "Holmes reports the first layer where the decision signal appears and where it stays stable."
+  },
+  {
+    label: "Circuit sufficiency",
+    status: "PASS",
+    detail: "Patching the selected internal states into a corrupted run restores the decision."
+  },
+  {
+    label: "Circuit necessity",
+    status: "PASS",
+    detail: "Replacing those states in the clean run destroys the decision."
+  },
+  {
+    label: "Minimality",
+    status: "PASS",
+    detail: "Nodes that can be removed without changing the proof are rejected from the certificate."
+  },
+  {
+    label: "Proxy-bias screen",
+    status: "FLAG/OK",
+    detail: "Matched-pair demographic substitutions test whether protected proxies move the decision margin."
+  }
+]
+
 const circuitNodes = [
   {
     site: "Layer 9, token 65",
@@ -94,6 +127,33 @@ const circuitNodes = [
     token: "PASS",
     recovery: "0.139",
     meaning: "early evidence signal that helps complete the circuit"
+  }
+]
+
+const biasAuditRows = [
+  {
+    group: "Reference proxy",
+    delta: "+0.000",
+    flips: "0/8",
+    verdict: "baseline"
+  },
+  {
+    group: "Black-name proxy",
+    delta: "-0.428",
+    flips: "2/8",
+    verdict: "flag"
+  },
+  {
+    group: "East Asian proxy",
+    delta: "-0.037",
+    flips: "0/8",
+    verdict: "ok"
+  },
+  {
+    group: "Arab/Muslim proxy",
+    delta: "-0.311",
+    flips: "1/8",
+    verdict: "review"
   }
 ]
 
@@ -299,6 +359,9 @@ export default function Home() {
             <a className="text-sm text-[var(--text-secondary)] hover:text-white" href="#math">
               Math
             </a>
+            <a className="text-sm text-[var(--text-secondary)] hover:text-white" href="#certificate">
+              Certificate
+            </a>
             <a className="text-sm text-[var(--text-secondary)] hover:text-white" href="#regulation">
               Regulation
             </a>
@@ -335,16 +398,16 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="#math"
+                href="#certificate"
                 className="rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#7fd8bf]"
               >
-                Explain the math simply
+                View the certificate
               </a>
               <a
-                href="#certificate"
+                href="#bias-audit"
                 className="rounded-md border border-white/18 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40"
               >
-                View proof example
+                See bias audit
               </a>
             </div>
           </div>
@@ -425,6 +488,62 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="certificate" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+              Main product
+            </p>
+            <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+              Decision Proof Certificate.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
+              This is the product buyers understand instantly: a pass/fail
+              certificate showing what the model decided, when the decision
+              formed inside the layers, which circuit carried it, and whether
+              the explanation survives intervention tests.
+            </p>
+            <div className="mt-6 rounded-md border border-[var(--accent)]/35 bg-[rgba(95,201,176,0.08)] p-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+                Certified claim
+              </p>
+              <p className="mt-3 text-xl font-semibold leading-8 text-white">
+                Holmes identified a bounded causal circuit that was necessary
+                and sufficient for the tested decision under the declared metric.
+              </p>
+            </div>
+          </div>
+
+          <div className="audit-surface">
+            <div className="border-b border-white/10 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                Certificate gates
+              </p>
+              <h3 className="mt-2 font-display text-2xl font-semibold text-white">
+                No pass, no strong claim.
+              </h3>
+            </div>
+            <div className="grid gap-px bg-white/10 md:grid-cols-2">
+              {certificateGates.map((gate) => (
+                <div key={gate.label} className="bg-[var(--bg-card)] p-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-display text-xl font-semibold text-white">
+                      {gate.label}
+                    </p>
+                    <span className="rounded-md border border-[var(--success)]/35 bg-[rgba(33,196,143,0.09)] px-2 py-1 text-xs font-semibold text-[var(--success)]">
+                      {gate.status}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
+                    {gate.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="math" className="border-b border-white/10 py-24">
         <div className="section-shell">
           <div className="max-w-3xl">
@@ -462,7 +581,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="certificate" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
+      <section id="interventions" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.92fr_1.08fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
@@ -491,6 +610,60 @@ export default function Home() {
               title="Minimality"
               detail="If a selected node can be removed without changing the proof, it is not allowed in the certified circuit."
             />
+          </div>
+        </div>
+      </section>
+
+      <section id="bias-audit" className="border-b border-white/10 py-24">
+        <div className="section-shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--danger)]">
+              Flaw finder
+            </p>
+            <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+              Find when the same facts get a different decision pressure.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
+              Holmes can run matched-pair demographic proxy audits: same income,
+              same loan, same employment, same prompt. Only the protected proxy
+              changes. If the model&apos;s approve-vs-deny margin shifts or flips,
+              the report flags potential differential treatment.
+            </p>
+            <p className="mt-5 rounded-md border border-white/10 bg-[var(--bg-card)] p-4 text-sm leading-6 text-[var(--text-secondary)]">
+              This is the viral demo: not &quot;the model is racist&quot; as a slogan,
+              but a signed mathematical artifact saying exactly which proxy
+              group moved the margin, by how much, and whether the effect passed
+              a paired permutation test.
+            </p>
+          </div>
+
+          <div className="audit-surface">
+            <div className="border-b border-white/10 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                Matched-pair output
+              </p>
+              <h3 className="mt-2 font-display text-2xl font-semibold text-white">
+                Bias audit certificate
+              </h3>
+            </div>
+            <div className="grid gap-px bg-white/10">
+              {biasAuditRows.map((row) => (
+                <div key={row.group} className="grid gap-3 bg-[var(--bg-card)] p-5 sm:grid-cols-[1fr_90px_80px_80px] sm:items-center">
+                  <p className="font-semibold text-white">{row.group}</p>
+                  <p className="font-mono text-sm text-[var(--text-secondary)]">{row.delta}</p>
+                  <p className="font-mono text-sm text-[var(--text-secondary)]">{row.flips}</p>
+                  <span className={`rounded-md border px-2 py-1 text-center text-xs font-semibold ${
+                    row.verdict === "flag"
+                      ? "border-[var(--danger)]/35 bg-[rgba(227,106,92,0.1)] text-[var(--danger)]"
+                      : row.verdict === "review"
+                        ? "border-[var(--warning)]/35 bg-[rgba(238,182,92,0.1)] text-[var(--warning)]"
+                        : "border-[var(--success)]/35 bg-[rgba(33,196,143,0.09)] text-[var(--success)]"
+                  }`}>
+                    {row.verdict}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
