@@ -76,6 +76,24 @@ const proofChecks = [
   }
 ]
 
+const heroEvidence = [
+  {
+    label: "Visible output",
+    value: "HIRE",
+    detail: "same answer"
+  },
+  {
+    label: "Hidden shift",
+    value: "-0.407",
+    detail: "margin delta"
+  },
+  {
+    label: "Corrected test",
+    value: "p=0.035",
+    detail: "FDR survives"
+  }
+]
+
 const certificateGates = [
   {
     label: "Decision readout",
@@ -412,40 +430,63 @@ export default function Home() {
 
       <section id="top" className="relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 forensic-grid" aria-hidden="true" />
-        <div className="section-shell relative grid min-h-[94vh] content-center gap-10 pb-16 pt-28 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-              Mechanistic evidence for AI decisions
-            </p>
-            <h1 className="mt-5 font-display text-[40px] font-semibold leading-[1.04] tracking-normal text-white sm:text-6xl lg:text-[70px]">
-              Show why the model decided.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--text-secondary)]">
-              Holmes turns an open-weight model decision into evidence:
-              what information mattered, where the model represented it inside,
-              and whether changing those internal signals changes the decision.
-            </p>
-            <p className="mt-5 max-w-xl rounded-md border border-[var(--accent)]/30 bg-[rgba(95,201,176,0.08)] p-4 text-base font-semibold leading-7 text-white">
-              New bias finding: the final output can still look correct while
-              the model&apos;s internal decision pressure shifts against a protected proxy.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#certificate"
-                className="rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#7fd8bf]"
-              >
-                View the certificate
-              </a>
-              <a
-                href="#bias-audit"
-                className="rounded-md border border-white/18 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40"
-              >
-                See bias audit
-              </a>
+        <div className="section-shell relative grid min-h-[94vh] items-stretch gap-10 pb-16 pt-28 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="flex h-full max-w-2xl flex-col justify-between gap-10">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                Mechanistic evidence for AI decisions
+              </p>
+              <h1 className="mt-5 font-display text-[40px] font-semibold leading-[1.04] tracking-normal text-white sm:text-6xl lg:text-[70px]">
+                Show why the model decided.
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--text-secondary)]">
+                Holmes turns an open-weight model decision into evidence:
+                what information mattered, where the model represented it inside,
+                and whether changing those internal signals changes the decision.
+              </p>
+              <p className="mt-5 max-w-xl rounded-md border border-[var(--accent)]/30 bg-[rgba(95,201,176,0.08)] p-4 text-base font-semibold leading-7 text-white">
+                New bias finding: the final output can still look correct while
+                the model&apos;s internal decision pressure shifts against a protected proxy.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#certificate"
+                  className="rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#7fd8bf]"
+                >
+                  View the certificate
+                </a>
+                <a
+                  href="#bias-audit"
+                  className="rounded-md border border-white/18 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40"
+                >
+                  See bias audit
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-md border border-white/10 bg-[rgba(18,23,22,0.82)] p-5 shadow-[0_20px_70px_rgba(0,0,0,0.22)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                Hidden pressure finding
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {heroEvidence.map((item) => (
+                  <div key={item.label} className="rounded-md border border-white/10 bg-black/15 p-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--text-muted)]">
+                      {item.label}
+                    </p>
+                    <p className="mt-2 font-display text-2xl font-semibold text-white">
+                      {item.value}
+                    </p>
+                    <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                      {item.detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="audit-surface">
+          <div className="audit-surface h-full">
             <div className="flex flex-wrap items-start justify-between gap-5 border-b border-white/10 p-5">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
