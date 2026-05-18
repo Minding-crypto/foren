@@ -1,5 +1,5 @@
 {
-  "name": "queueforme-landing",
+  "name": "holmes-investor-site",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,14 +10,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.0.2",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
-    "framer-motion": "^11.3.28",
     "next": "^14.2.35",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.4.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",

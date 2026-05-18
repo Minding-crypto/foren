@@ -17,3 +17,5 @@ forensicai_server_ed25519.pub
 inspect_*.py
 proof_smoke.py
 qwen_*prompt*.txt
+blackbox_analyzer.py
+backend/
