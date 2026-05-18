@@ -189,38 +189,38 @@ const hiddenPressureStats = [
 const useCases = [
   {
     title: "Banks and lenders",
-    pressure:
-      "A rejected or approved credit decision needs reasons, audit trails, and model-risk evidence. A black-box answer is not enough.",
+    trigger: "Credit decisions need specific reasons and model-risk evidence.",
+    artifact: "Decision proof certificate + adverse-action trace",
     buyer: "Compliance, model risk, credit policy, legal"
   },
   {
     title: "Hiring platforms",
-    pressure:
-      "Employment AI is already under bias-audit and notice rules. Vendors need proof that a decision was not just surface pattern matching.",
+    trigger: "Employment AI faces bias-audit, notice, and discrimination scrutiny.",
+    artifact: "Matched-pair bias pressure certificate",
     buyer: "HR tech vendors, enterprise HR, outside counsel"
   },
   {
     title: "Insurance and healthcare triage",
-    pressure:
-      "High-impact decisions need evidence that the model used allowed factors and stayed stable under controlled changes.",
+    trigger: "High-impact triage and claims decisions need allowed-factor evidence.",
+    artifact: "Counterfactual stability and sensitivity report",
     buyer: "Risk teams, clinical governance, claims operations"
   },
   {
     title: "AI vendors selling to enterprises",
-    pressure:
-      "Procurement teams increasingly ask for model governance, explainability, and incident-response evidence before signing.",
+    trigger: "Enterprise procurement asks for governance before signing.",
+    artifact: "Signed model behavior dossier for sales security review",
     buyer: "AI startups, platform vendors, sales engineering"
   },
   {
     title: "Incident response",
-    pressure:
-      "When an AI output causes harm, teams need to reconstruct what happened, what mattered, and whether the behavior is repeatable.",
+    trigger: "After harm, teams must reconstruct what happened and why.",
+    artifact: "Replayable forensic record with prompt, model, and circuit evidence",
     buyer: "Trust and safety, security, legal, auditors"
   },
   {
     title: "Continuous model governance",
-    pressure:
-      "Every prompt update, model upgrade, and policy change can alter behavior. Companies need regression tests for decision logic.",
+    trigger: "Prompt updates and model upgrades can silently change logic.",
+    artifact: "Regression suite for decision margins, circuits, and proxy shifts",
     buyer: "ML platform, governance, internal audit"
   }
 ]
@@ -488,20 +488,20 @@ export default function Home() {
 
               <div className="grid gap-3">
                 {circuitNodes.map((node) => (
-                  <div
+                  <article
                     key={node.site}
-                    className="grid gap-3 rounded-md border border-white/10 bg-white/[0.03] p-4 sm:grid-cols-[1fr_72px_1fr]"
+                    className="grid min-h-[116px] gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 sm:grid-cols-[minmax(0,1fr)_88px_180px] sm:items-stretch"
                   >
-                    <div>
+                    <div className="flex min-w-0 flex-col justify-center">
                       <p className="font-mono text-sm text-white">{node.site}</p>
                       <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">
                         {node.meaning}
                       </p>
                     </div>
-                    <div className="rounded-md border border-[var(--accent-2)]/35 bg-[rgba(238,182,92,0.09)] px-3 py-2 text-center font-mono text-sm text-[var(--accent-2)]">
+                    <div className="flex min-h-[64px] items-center justify-center rounded-md border border-[var(--accent-2)]/35 bg-[rgba(238,182,92,0.09)] px-3 py-2 text-center font-mono text-sm font-semibold text-[var(--accent-2)]">
                       {node.token}
                     </div>
-                    <div>
+                    <div className="flex min-w-0 flex-col justify-center">
                       <p className="text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">
                         recovery
                       </p>
@@ -513,7 +513,7 @@ export default function Home() {
                       </div>
                       <p className="mt-1 font-mono text-sm text-white">{node.recovery}</p>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
@@ -822,37 +822,52 @@ export default function Home() {
       </section>
 
       <section id="use-cases" className="border-b border-white/10 bg-[var(--bg-surface)] py-24">
-        <div className="section-shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-              Why customers need it
-            </p>
-            <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              When AI touches money, jobs, health, or legal risk, &quot;trust us&quot; stops working.
-            </h2>
-            <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
-              Holmes is the evidence layer for teams that need to prove a
-              model decision was tested, repeatable, and defensible.
-            </p>
+        <div className="section-shell">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                Why customers need it
+              </p>
+              <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+                When AI touches money, jobs, health, or legal risk, &quot;trust us&quot; stops working.
+              </h2>
+            </div>
+            <div className="rounded-md border border-[var(--accent)]/25 bg-[rgba(95,201,176,0.08)] p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+                What Holmes sells
+              </p>
+              <p className="mt-3 text-xl font-semibold leading-8 text-white">
+                A decision evidence pack: what changed, what mattered, where it appeared internally,
+                and whether the behavior survives controlled tests.
+              </p>
+            </div>
           </div>
 
-          <div className="grid gap-4">
-            {useCases.map((item) => (
-              <article key={item.title} className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <h3 className="font-display text-2xl font-semibold text-white">
-                    {item.title}
-                  </h3>
-                  <span className="rounded-md border border-[var(--accent)]/25 px-3 py-1 text-xs font-medium uppercase tracking-[0.12em] text-[var(--accent)]">
-                    urgent buyer
-                  </span>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {useCases.map((item, index) => (
+              <article key={item.title} className="grid min-h-[250px] content-between rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
+                <div>
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="font-display text-2xl font-semibold leading-tight text-white">
+                      {item.title}
+                    </h3>
+                    <span className="rounded-md border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-xs text-[var(--text-muted)]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="mt-5 grid gap-3">
+                    <UseCaseLine label="Trigger" value={item.trigger} />
+                    <UseCaseLine label="Holmes artifact" value={item.artifact} />
+                  </div>
                 </div>
-                <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">
-                  {item.pressure}
-                </p>
-                <p className="mt-4 text-sm font-medium text-white">
-                  Buyer: {item.buyer}
-                </p>
+                <div className="mt-5 border-t border-white/10 pt-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-muted)]">
+                    Buyer
+                  </p>
+                  <p className="mt-2 text-sm font-medium leading-6 text-white">
+                    {item.buyer}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
@@ -906,6 +921,19 @@ function ProofGate({ title, detail }: { title: string; detail: string }) {
       </div>
       <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{detail}</p>
     </article>
+  )
+}
+
+function UseCaseLine({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid gap-2 border-t border-white/10 pt-3 sm:grid-cols-[96px_1fr]">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">
+        {label}
+      </p>
+      <p className="text-sm leading-6 text-[var(--text-secondary)]">
+        {value}
+      </p>
+    </div>
   )
 }
 
