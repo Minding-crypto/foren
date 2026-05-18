@@ -78,19 +78,19 @@ const proofChecks = [
 
 const heroEvidence = [
   {
-    label: "Visible output",
+    label: "Output",
     value: "HIRE",
-    detail: "same answer"
+    detail: "same"
   },
   {
-    label: "Hidden shift",
+    label: "Margin",
     value: "-0.407",
-    detail: "margin delta"
+    detail: "female proxy"
   },
   {
-    label: "Corrected test",
-    value: "p=0.035",
-    detail: "FDR survives"
+    label: "FDR",
+    value: "0.035",
+    detail: "p adj"
   }
 ]
 
@@ -465,19 +465,27 @@ export default function Home() {
             </div>
 
             <div className="rounded-md border border-white/10 bg-[rgba(18,23,22,0.82)] p-5 shadow-[0_20px_70px_rgba(0,0,0,0.22)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
-                Hidden pressure finding
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                  Latest audit signal
+                </p>
+                <span className="rounded-md border border-[var(--success)]/30 bg-[rgba(33,196,143,0.08)] px-2 py-1 text-xs font-semibold text-[var(--success)]">
+                  output unchanged
+                </span>
+              </div>
+              <p className="mt-3 font-display text-2xl font-semibold leading-tight text-white">
+                Same answer. Different internal pressure.
               </p>
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <div className="mt-4 grid grid-cols-3 overflow-hidden rounded-md border border-white/10 bg-black/15">
                 {heroEvidence.map((item) => (
-                  <div key={item.label} className="rounded-md border border-white/10 bg-black/15 p-4">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--text-muted)]">
+                  <div key={item.label} className="border-r border-white/10 p-3 last:border-r-0">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--text-muted)]">
                       {item.label}
                     </p>
-                    <p className="mt-2 font-display text-2xl font-semibold text-white">
+                    <p className="mt-2 font-mono text-sm font-semibold text-white sm:text-base">
                       {item.value}
                     </p>
-                    <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                    <p className="mt-1 text-xs leading-5 text-[var(--text-secondary)]">
                       {item.detail}
                     </p>
                   </div>
