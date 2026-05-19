@@ -1,0 +1,96 @@
+{
+  "artifact_id": "mechanistic_proof_437bb845",
+  "artifact_type": "mechanistic_evidence_certificate",
+  "standard": {
+    "id": "HMEC-0.1",
+    "claim_scope": "bounded_model_prompt_family_decision_metric"
+  },
+  "scope": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "provider": "local",
+    "checkpoint_hash": null,
+    "tokenizer_hash": null,
+    "decision_metric": "logit margin between target and opposite decision token families",
+    "prompt_hash": "sha256:example",
+    "prompt_family": "fraud-review-rule-prompts",
+    "claim_boundary": [
+      "specific model checkpoint",
+      "specific tokenizer",
+      "specific prompt or contrast family",
+      "specific target decision family",
+      "specific decision-margin metric"
+    ]
+  },
+  "decision": {
+    "visible_output": "DENY",
+    "target_family": ["deny", "reject", "block"],
+    "opposite_family": ["approve", "allow", "accept"],
+    "clean_margin": 8.2519,
+    "corrupt_margin": -0.5788,
+    "contrast_gap": 8.8307
+  },
+  "certificate": {
+    "status": "CERTIFIED_MECHANISTIC_EVIDENCE",
+    "claim_allowed": true,
+    "bounded_claim": "For this model checkpoint, prompt family, target decision family, and decision metric, Holmes identified a bounded internal circuit that passed sufficiency, necessity, minimality, and negative-control gates.",
+    "not_certified": [
+      "all future prompts",
+      "all behaviors of the model",
+      "legal causation",
+      "human-like reasoning",
+      "truth of the model output"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "open_weight_access",
+      "required": true,
+      "passed": true,
+      "evidence": {
+        "exact_for_deployed_inference": true
+      }
+    },
+    {
+      "gate": "exact_decision_readout",
+      "required": true,
+      "passed": true,
+      "evidence": {
+        "metric": "target-vs-opposite logit margin"
+      }
+    },
+    {
+      "gate": "circuit_sufficiency",
+      "required": true,
+      "passed": true,
+      "evidence": {
+        "recovery": 0.9922
+      }
+    },
+    {
+      "gate": "circuit_necessity",
+      "required": true,
+      "passed": true,
+      "evidence": {
+        "ablated_margin": -7.465
+      }
+    },
+    {
+      "gate": "negative_controls",
+      "required": true,
+      "passed": true,
+      "evidence": {
+        "empirical_p_value": 0.02,
+        "random_full_proof_pass_count": 0
+      }
+    }
+  ],
+  "policy_result": {
+    "pass": true,
+    "reasons": []
+  },
+  "artifact_hash": {
+    "sha256": "example-only",
+    "signature": null,
+    "signature_algorithm": null
+  }
+}

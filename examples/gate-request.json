@@ -1,0 +1,8 @@
+{
+  "report_id": "mechanistic_proof_437bb845",
+  "policy": {
+    "require_mechanistic_proof": true,
+    "require_negative_controls": true,
+    "max_negative_control_p": 0.05
+  }
+}

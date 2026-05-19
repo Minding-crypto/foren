@@ -6,8 +6,8 @@ export default function TrustPage() {
     <PageShell>
       <PageHero
         eyebrow="Validation and trust"
-        title="Holmes has to test itself before buyers trust it."
-        body="The trust page explains the certification discipline: benchmark validation, negative controls, false-positive checks, and conservative review states."
+        title="Every certificate is backed by validation, controls, and conservative failure states."
+        body="Holmes measures known-rule accuracy, proof yield, false-positive controls, and review outcomes before it allows a strong mechanistic claim."
       >
         <div className="grid gap-3 sm:grid-cols-2">
           <MetricCard label="Latest smoke run" value="1/1" detail="decision accuracy on a tiny benchmark case" tone="success" />
@@ -18,7 +18,7 @@ export default function TrustPage() {
       <Section
         eyebrow="Benchmark suite"
         title="Accuracy is reported as measured performance."
-        body="The validation suite is designed to make the product credible: known-rule prompts, expected outputs, proof yield, and failure cases."
+        body="Known-rule prompts, expected outputs, proof yield, and failure cases are reported as measurable validation results."
       >
         <div className="grid gap-4 md:grid-cols-2">
           {trustBenchmarks.map((item) => (

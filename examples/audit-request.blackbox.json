@@ -1,0 +1,8 @@
+{
+  "mode": "blackbox_certificate",
+  "provider": "openai",
+  "model": "black-box-model-name",
+  "decision_target": "approve",
+  "blackbox_max_features": 6,
+  "prompt": "Applicant: income=85000 loan=120000 delinquency=no employment=5yr. Should we approve or deny? Answer:"
+}

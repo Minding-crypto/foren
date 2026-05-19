@@ -7,7 +7,7 @@ export default function ProofPage() {
       <PageHero
         eyebrow="Mechanistic proof workflow"
         title="From final answer to tested internal circuit."
-        body="This page shows the actual mathematical layers Holmes uses before it allows a strong mechanistic claim."
+        body="Holmes moves from output behavior to internal intervention tests before allowing a strong mechanistic claim."
       >
         <div className="grid gap-3 sm:grid-cols-2">
           <MetricCard label="Claim type" value="bounded" detail="valid for this model, prompt family, and decision metric" />
@@ -17,8 +17,8 @@ export default function ProofPage() {
 
       <Section
         eyebrow="Math stack"
-        title="Every layer answers a simple buyer question."
-        body="The technical methods matter, but the investor version is simple: can the report show what moved the answer, where it appeared inside the model, and whether intervention changes the decision?"
+        title="Every layer answers a concrete audit question."
+        body="The report must show what moved the answer, where the signal appeared inside the model, and whether intervention changed the decision."
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {mathLayers.map((layer) => (
@@ -63,7 +63,7 @@ export default function ProofPage() {
       <Section
         eyebrow="Circuit nodes"
         title="The report names the internal sites that earned the certificate."
-        body="A buyer should not see a mystical explanation. They should see layer, token, recovery, and pass/fail status."
+        body="The certificate lists layer, token, recovery, and pass/fail status instead of relying on a vague natural-language explanation."
       >
         <div className="grid gap-4 md:grid-cols-3">
           {circuitNodes.map((node) => (

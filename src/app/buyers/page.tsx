@@ -9,7 +9,7 @@ export default function BuyersPage() {
         title="AI decisions are becoming evidence problems."
         body="The customer does not buy philosophy. They buy a defensible artifact before deployment, after incidents, and during audits."
       >
-        <div className="rounded-md border border-[var(--accent)]/30 bg-[rgba(95,201,176,0.08)] p-6">
+        <div className="rounded-md border border-white/10 bg-white/[0.03] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
             What Holmes sells
           </p>
@@ -77,7 +77,7 @@ export default function BuyersPage() {
               href={item.link}
               target="_blank"
               rel="noreferrer"
-              className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6 transition hover:border-[var(--accent)]/50"
+              className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
                 {item.region}

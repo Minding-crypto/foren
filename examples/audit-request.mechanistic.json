@@ -1,0 +1,10 @@
+{
+  "mode": "mechanistic_proof",
+  "provider": "local",
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "decision_target": "deny",
+  "proof_top_k": 48,
+  "proof_max_nodes": 16,
+  "negative_controls": 24,
+  "prompt": "Fraud review rule: DENY if chargeback_risk=high or sanctions_match=yes. Applicant: chargeback_risk=high sanctions_match=no account_age=12mo. Should we approve or deny? Answer:"
+}

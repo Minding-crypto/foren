@@ -1,9 +1,44 @@
 import Link from "next/link"
 
-import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../components/site-shell"
+import { PageHero, PageShell, Section, MetricCard, PositioningBanner, StatusPill } from "../components/site-shell"
 import { biasAuditRows, certificateGates, exampleArtifacts } from "../lib/site-data"
 
 const productPages = [
+  {
+    href: "/platform",
+    title: "Product architecture",
+    detail:
+      "Deploy a local runner, report registry, release gate, and dashboard inside your existing AI workflow.",
+    cta: "Open platform view"
+  },
+  {
+    href: "/dashboard",
+    title: "Governance dashboard",
+    detail:
+      "See the report registry, release queue, blocked deployments, proxy alerts, and searchable certificate artifacts.",
+    cta: "Open dashboard"
+  },
+  {
+    href: "/integrations",
+    title: "Workflow integrations",
+    detail:
+      "Connect Holmes to CI/CD, model registries, agent traces, governance platforms, and review tickets.",
+    cta: "Open integrations"
+  },
+  {
+    href: "/policy",
+    title: "Policy as code",
+    detail:
+      "Turn evidence standards into enforceable release rules that block weak proofs, bias pressure, and drift.",
+    cta: "Open policy gates"
+  },
+  {
+    href: "/benchmark",
+    title: "Benchmark validation",
+    detail:
+      "Validate certificates with known-rule tests, proof yield, false-positive controls, and regression suites.",
+    cta: "Open benchmark suite"
+  },
   {
     href: "/proof",
     title: "Mechanistic proof workflow",
@@ -22,7 +57,7 @@ const productPages = [
     href: "/trust",
     title: "Validation and controls",
     detail:
-      "Show investors why the certificate is not hand-wavy: benchmark suites, random controls, and false-positive gates.",
+      "Review the benchmark suites, random controls, and false-positive gates behind every certificate.",
     cta: "See validation suite"
   }
 ]
@@ -58,18 +93,20 @@ export default function Home() {
         </div>
       </PageHero>
 
+      <PositioningBanner />
+
       <Section
-        eyebrow="What buyers see"
-        title="Not a single landing page. A product with evidence modules."
-        body="Each page is now designed like a buyer conversation: what the tool does, what it proves, what it refuses to claim, and what artifact the customer receives."
+        eyebrow="Product modules"
+        title="Decision forensics that fits into the AI stack you already use."
+        body="Start with a local runner and API. Add release gates, evidence storage, bias-pressure monitoring, regression tests, and mechanistic certificates where the risk is highest."
         surface
       >
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {productPages.map((page) => (
             <Link
               key={page.href}
               href={page.href}
-              className="grid min-h-[260px] content-between rounded-md border border-white/10 bg-[var(--bg-card)] p-6 transition hover:border-[var(--accent)]/50"
+              className="grid min-h-[260px] content-between rounded-md border border-white/10 bg-[var(--bg-card)] p-6"
             >
               <div>
                 <h3 className="font-display text-2xl font-semibold leading-tight text-white">
@@ -108,7 +145,7 @@ export default function Home() {
       <Section
         eyebrow="Bias pressure monitor"
         title="The output can look correct while the internals shift."
-        body="The website now shows the kind of viral enterprise finding buyers understand: same visible answer, statistically corrected internal pressure shift."
+        body="Holmes flags cases where the visible answer stays unchanged but the decision margin moves against a protected proxy after statistical correction."
         surface
       >
         <div className="grid gap-3">

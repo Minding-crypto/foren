@@ -7,7 +7,7 @@ export default function ResearchPage() {
       <PageHero
         eyebrow="Research foundation"
         title="Built from circuits, sparse features, and proof-style tests."
-        body="This page gives investors the vocabulary: Shapley and ablation for behavior, activation patching for mechanism, and negative controls for trust."
+        body="Holmes combines behavioral attribution, activation patching, circuit validation, sparse-feature analysis, and negative controls into one decision-forensics workflow."
       >
         <div className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
@@ -21,7 +21,7 @@ export default function ResearchPage() {
 
       <Section
         eyebrow="Simple glossary"
-        title="The terms investors will ask about."
+        title="The core terms behind the certificate."
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {mathLayers.map((layer) => (
@@ -38,7 +38,7 @@ export default function ResearchPage() {
 
       <Section
         eyebrow="Papers"
-        title="The credible research story is much bigger than one method."
+        title="The research base is bigger than one method."
         body="The updated stack now includes recent work on Qwen sparse features, circuit tracing, causal abstraction, SAE benchmarks, code correctness, and agent security."
         surface
       >
@@ -49,7 +49,7 @@ export default function ResearchPage() {
               href={paper.link}
               target="_blank"
               rel="noreferrer"
-              className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6 transition hover:border-[var(--accent-2)]/55"
+              className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6"
             >
               <p className="font-mono text-sm text-[var(--accent-2)]">{paper.year}</p>
               <h3 className="mt-3 font-display text-xl font-semibold leading-tight text-white">

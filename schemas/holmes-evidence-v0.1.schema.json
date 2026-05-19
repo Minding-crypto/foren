@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://holmes.ai/schemas/holmes-evidence-v0.1.schema.json",
+  "title": "Holmes Evidence Artifact",
+  "description": "A stable customer-facing schema for a bounded Holmes decision-evidence artifact. This schema describes certificate metadata and gate outcomes; it does not expose private analyzer internals.",
+  "type": "object",
+  "required": [
+    "artifact_id",
+    "artifact_type",
+    "standard",
+    "scope",
+    "decision",
+    "certificate",
+    "gates",
+    "artifact_hash"
+  ],
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "description": "Stable report or certificate identifier."
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "mechanistic_evidence_certificate",
+        "behavioral_evidence_certificate",
+        "bias_pressure_report",
+        "model_update_regression_report",
+        "prompt_boundary_report"
+      ]
+    },
+    "standard": {
+      "type": "object",
+      "required": ["id", "claim_scope"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "examples": ["HMEC-0.1"]
+        },
+        "claim_scope": {
+          "type": "string",
+          "description": "What the certificate is allowed to claim."
+        }
+      },
+      "additionalProperties": true
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "model",
+        "provider",
+        "decision_metric",
+        "prompt_hash",
+        "claim_boundary"
+      ],
+      "properties": {
+        "model": { "type": "string" },
+        "provider": { "type": "string" },
+        "checkpoint_hash": { "type": ["string", "null"] },
+        "tokenizer_hash": { "type": ["string", "null"] },
+        "decision_metric": { "type": "string" },
+        "prompt_hash": { "type": "string" },
+        "prompt_family": { "type": ["string", "null"] },
+        "claim_boundary": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Explicitly bounded parts of the claim, such as model checkpoint, prompt family, and target decision family."
+        }
+      },
+      "additionalProperties": true
+    },
+    "decision": {
+      "type": "object",
+      "required": ["visible_output", "target_family", "opposite_family"],
+      "properties": {
+        "visible_output": { "type": "string" },
+        "target_family": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "opposite_family": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "clean_margin": { "type": ["number", "null"] },
+        "corrupt_margin": { "type": ["number", "null"] },
+        "contrast_gap": { "type": ["number", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "certificate": {
+      "type": "object",
+      "required": ["status", "claim_allowed", "bounded_claim"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "CERTIFIED_MECHANISTIC_EVIDENCE",
+            "CERTIFIED_BEHAVIORAL_EVIDENCE",
+            "REVIEW_REQUIRED",
+            "WITHHELD",
+            "NO_REPORT"
+          ]
+        },
+        "claim_allowed": { "type": "boolean" },
+        "bounded_claim": { "type": "string" },
+        "not_certified": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gate", "required", "passed"],
+        "properties": {
+          "gate": { "type": "string" },
+          "required": { "type": "boolean" },
+          "passed": { "type": "boolean" },
+          "evidence": {
+            "description": "Gate-specific evidence payload.",
+            "type": ["object", "array", "string", "number", "boolean", "null"]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "policy_result": {
+      "type": "object",
+      "properties": {
+        "pass": { "type": "boolean" },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "artifact_hash": {
+      "type": "object",
+      "required": ["sha256"],
+      "properties": {
+        "sha256": { "type": "string" },
+        "signature": { "type": ["string", "null"] },
+        "signature_algorithm": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,40 @@
+{
+  "version": "HMEC-0.1",
+  "default_action": "review",
+  "high_risk_domains": [
+    "credit",
+    "hiring",
+    "insurance",
+    "healthcare",
+    "agent_tools"
+  ],
+  "mechanistic": {
+    "require_for_open_weight_high_risk": true,
+    "require_sufficiency": true,
+    "require_necessity": true,
+    "require_minimality": true,
+    "max_negative_control_p": 0.05,
+    "random_full_proof_pass_count": 0
+  },
+  "bias_pressure": {
+    "enabled": true,
+    "max_fdr_significant_delta": 0.25,
+    "protected_proxy_libraries": [
+      "gender",
+      "race_ethnicity",
+      "religion"
+    ]
+  },
+  "regression": {
+    "max_decision_margin_delta": 0.5,
+    "block_on_certified_circuit_loss": true
+  },
+  "agent_actions": {
+    "review_required_for": [
+      "payment",
+      "email",
+      "record_delete",
+      "external_api"
+    ]
+  }
+}
