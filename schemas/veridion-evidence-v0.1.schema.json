@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://holmes.ai/schemas/holmes-evidence-v0.1.schema.json",
-  "title": "Holmes Evidence Artifact",
-  "description": "A stable customer-facing schema for a bounded Holmes decision-evidence artifact. This schema describes certificate metadata and gate outcomes; it does not expose private analyzer internals.",
+  "$id": "https://veridion.ai/schemas/veridion-evidence-v0.1.schema.json",
+  "title": "Veridion Evidence Artifact",
+  "description": "A stable customer-facing schema for a bounded Veridion decision-evidence artifact. This schema describes certificate metadata and gate outcomes; it does not expose private analyzer internals.",
   "type": "object",
   "required": [
     "artifact_id",
@@ -23,6 +23,7 @@
       "type": "string",
       "enum": [
         "mechanistic_evidence_certificate",
+        "blackbox_behavioral_evidence_certificate",
         "behavioral_evidence_certificate",
         "bias_pressure_report",
         "model_update_regression_report",
@@ -133,6 +134,29 @@
       "properties": {
         "pass": { "type": "boolean" },
         "reasons": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "client_review": {
+      "type": "object",
+      "description": "Buyer-facing interpretation of the evidence artifact.",
+      "properties": {
+        "verdict": { "type": "string" },
+        "would_i_buy": { "type": "string" },
+        "production_release": { "type": "string" },
+        "pilot_value": { "type": "string" },
+        "strengths": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "risks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "next_actions": {
           "type": "array",
           "items": { "type": "string" }
         }

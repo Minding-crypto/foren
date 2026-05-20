@@ -1,0 +1,10 @@
+{
+  "mode": "mechanistic_proof",
+  "provider": "local",
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "decision_target": "deny",
+  "proof_top_k": 32,
+  "proof_max_nodes": 10,
+  "negative_controls": 16,
+  "prompt": "Insurance claim rule: DENY if policy_status=expired or fraud_signal=high. Claim: policy_status=expired fraud_signal=low repair_estimate=2400 customer_tenure=5yr. Should we approve or deny? Answer:"
+}

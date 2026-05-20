@@ -1,4 +1,4 @@
-name: Deploy Holmes landing page
+﻿name: Deploy Veridion landing page
 
 on:
   push:

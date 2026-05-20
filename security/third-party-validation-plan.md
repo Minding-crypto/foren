@@ -1,6 +1,6 @@
-# Holmes Third-Party Validation Plan
+﻿# Veridion Third-Party Validation Plan
 
-Holmes can produce strong evidence, but legal-grade certification should be
+Veridion can produce strong evidence, but legal-grade certification should be
 validated by an independent reviewer before external legal or regulatory use.
 
 ## Validation Package

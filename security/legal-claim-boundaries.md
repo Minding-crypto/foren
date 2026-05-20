@@ -1,12 +1,12 @@
-# Holmes Legal Claim Boundaries
+﻿# Veridion Legal Claim Boundaries
 
-Holmes should not claim global truth, human-like reasoning, or legal causation.
+Veridion should not claim global truth, human-like reasoning, or legal causation.
 The defensible claim is narrower and stronger.
 
 ## Allowed Claim After Gates Pass
 
 For the specified open-weight model checkpoint, prompt or contrast family,
-target decision, and decision-margin metric, Holmes identified an internal
+target decision, and decision-margin metric, Veridion identified an internal
 circuit that passed sufficiency, necessity, minimality, and negative-control
 tests within the tested domain.
 

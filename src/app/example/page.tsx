@@ -1,4 +1,4 @@
-import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
+﻿import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
 import {
   biasAuditRows,
   exampleArtifacts,
@@ -24,7 +24,7 @@ export default function ExamplePage() {
       <PageHero
         eyebrow="Complete example report"
         title="The kind of evidence normal AI logs cannot show."
-        body="This is the investor-friendly version of a Holmes report: not just what the model answered, but the hidden pressure, the controlled flips, the internal intervention tests, and the exact boundary of what can be certified."
+        body="This is the investor-friendly version of a Veridion report: not just what the model answered, but the hidden pressure, the controlled flips, the internal intervention tests, and the exact boundary of what can be certified."
       >
         <div className="audit-surface p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
@@ -42,7 +42,7 @@ export default function ExamplePage() {
       <Section
         eyebrow="The wow moment"
         title="The output looked fine. The internals were already warning you."
-        body="Most AI monitoring stops at the visible answer. Holmes measures the pressure behind that answer and asks whether the claimed internal evidence actually controls the decision."
+        body="Most AI monitoring stops at the visible answer. Veridion measures the pressure behind that answer and asks whether the claimed internal evidence actually controls the decision."
         surface
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -66,23 +66,23 @@ export default function ExamplePage() {
       </Section>
 
       <Section
-        eyebrow="Before and after Holmes"
+        eyebrow="Before and after Veridion"
         title="The difference is not prettier dashboards. It is unavailable evidence."
-        body="Ordinary logs capture the answer. Holmes creates a replayable decision evidence pack that exposes hidden margin shifts, internal signal locations, and whether those signals causally control the output."
+        body="Ordinary logs capture the answer. Veridion creates a replayable decision evidence pack that exposes hidden margin shifts, internal signal locations, and whether those signals causally control the output."
       >
         <div className="grid gap-4 lg:grid-cols-2">
           {reportPanels.map((panel) => (
             <article key={panel.title} className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h3 className="font-display text-2xl font-semibold text-white">{panel.title}</h3>
-                <StatusPill tone={panel.title.includes("Holmes") ? "success" : "warning"}>
+                <StatusPill tone={panel.title.includes("Veridion") ? "success" : "warning"}>
                   {panel.verdict}
                 </StatusPill>
               </div>
               <div className="mt-5 grid gap-3">
                 {panel.items.map((item) => (
                   <div key={item} className="flex items-center gap-3 rounded-md border border-white/10 bg-black/15 p-3">
-                    <span className={`h-2.5 w-2.5 rounded-full ${panel.title.includes("Holmes") ? "bg-[var(--accent)]" : "bg-[var(--warning)]"}`} />
+                    <span className={`h-2.5 w-2.5 rounded-full ${panel.title.includes("Veridion") ? "bg-[var(--accent)]" : "bg-[var(--warning)]"}`} />
                     <p className="text-sm font-medium text-white">{item}</p>
                   </div>
                 ))}
@@ -95,7 +95,7 @@ export default function ExamplePage() {
       <Section
         eyebrow="Prompt under test"
         title="The report starts with the exact decision context."
-        body="This keeps the claim bounded. Holmes is not saying it explained every possible behavior of the model. It is explaining this decision under this tested setup."
+        body="This keeps the claim bounded. Veridion is not saying it explained every possible behavior of the model. It is explaining this decision under this tested setup."
       >
         <div className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">Prompt</p>

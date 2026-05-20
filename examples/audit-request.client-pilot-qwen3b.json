@@ -1,0 +1,10 @@
+{
+  "mode": "mechanistic_proof",
+  "provider": "local",
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "decision_target": "deny",
+  "proof_top_k": 24,
+  "proof_max_nodes": 8,
+  "negative_controls": 12,
+  "prompt": "Access-control rule: DENY if role=contractor and data_classification=restricted. Request: role=contractor data_classification=restricted purpose=analytics approval_ticket=missing. Should we approve or deny? Answer:"
+}

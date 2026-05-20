@@ -1,15 +1,29 @@
 import Link from "next/link"
 
 import { PageHero, PageShell, Section, MetricCard, PositioningBanner, StatusPill } from "../components/site-shell"
-import { biasAuditRows, certificateGates, exampleArtifacts } from "../lib/site-data"
+import { biasAuditRows, certificateGates, exampleArtifacts, pilotOutcomes, productPackages, salesProofPoints } from "../lib/site-data"
 
 const productPages = [
+  {
+    href: "/pilot",
+    title: "Paid pilot path",
+    detail:
+      "A seven-day buyer workflow: connect their model, audit 20 cases, ship a signed evidence packet, and decide the production gate.",
+    cta: "Start pilot path"
+  },
   {
     href: "/platform",
     title: "Product architecture",
     detail:
       "Deploy a local runner, report registry, release gate, and dashboard inside your existing AI workflow.",
     cta: "Open platform view"
+  },
+  {
+    href: "/insights",
+    title: "Evidence intelligence",
+    detail:
+      "Translate certificate math into what can ship, what is risky, what claim is allowed, and what to fix next.",
+    cta: "Open insights layer"
   },
   {
     href: "/dashboard",
@@ -22,7 +36,7 @@ const productPages = [
     href: "/integrations",
     title: "Workflow integrations",
     detail:
-      "Connect Holmes to CI/CD, model registries, agent traces, governance platforms, and review tickets.",
+      "Connect Veridion to CI/CD, model registries, agent traces, governance platforms, and review tickets.",
     cta: "Open integrations"
   },
   {
@@ -68,7 +82,7 @@ export default function Home() {
       <PageHero
         eyebrow="Mechanistic evidence for AI decisions"
         title="Show why the model decided."
-        body="Holmes turns an open-weight model decision into evidence: what information mattered, where the model represented it inside, and whether changing those internal signals changes the decision."
+        body="Veridion turns an open-weight model decision into evidence: what information mattered, where the model represented it inside, and whether changing those internal signals changes the decision."
       >
         <div className="audit-surface">
           <div className="border-b border-white/10 p-5">
@@ -82,7 +96,7 @@ export default function Home() {
               Same answer. Different internal pressure.
             </h2>
             <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
-              Output-only testing says HIRE. Holmes shows the hidden margin moved against a protected proxy.
+              Output-only testing says HIRE. Veridion shows the hidden margin moved against a protected proxy.
             </p>
           </div>
           <div className="grid gap-px bg-white/10 sm:grid-cols-3">
@@ -90,10 +104,44 @@ export default function Home() {
             <MetricCard label="Hidden shift" value="-0.407" detail="female-name proxy margin delta" tone="danger" />
             <MetricCard label="Corrected test" value="0.035" detail="FDR-adjusted p-value" tone="warning" />
           </div>
+          <div className="flex flex-wrap gap-3 border-t border-white/10 p-5">
+            <Link
+              href="/pilot"
+              className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black transition hover:bg-[var(--accent-hover)]"
+            >
+              Start a paid pilot
+            </Link>
+            <Link
+              href="/example"
+              className="rounded-md border border-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.04]"
+            >
+              View evidence example
+            </Link>
+          </div>
         </div>
       </PageHero>
 
       <PositioningBanner />
+
+      <Section
+        eyebrow="Commercial pilot"
+        title="The first sale is not a philosophy demo. It is a customer evidence packet."
+        body="A buyer gives Veridion one high-risk prompt family and one model. Veridion returns a report registry, policy decision, hidden-risk findings, and a bounded proof or refusal they can use before deployment."
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          {pilotOutcomes.map((item) => (
+            <MetricCard key={item.label} label={item.label} value={item.value} detail={item.detail} />
+          ))}
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {salesProofPoints.map((point) => (
+            <article key={point.claim} className="interactive-card rounded-md border border-white/10 bg-[var(--bg-card)] p-5">
+              <h3 className="font-display text-xl font-semibold leading-tight text-white">{point.claim}</h3>
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{point.evidence}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
 
       <Section
         eyebrow="Product modules"
@@ -125,7 +173,7 @@ export default function Home() {
       <Section
         eyebrow="Example artifact"
         title="A concrete report, not a vague explanation."
-        body="For a model decision, Holmes can show the prompt, model, visible output, decision score, intervention tests, and the limits of the claim."
+        body="For a model decision, Veridion can show the prompt, model, visible output, decision score, intervention tests, and the limits of the claim."
       >
         <div className="grid gap-4 md:grid-cols-4">
           {exampleArtifacts.map((item) => (
@@ -143,9 +191,36 @@ export default function Home() {
       </Section>
 
       <Section
+        eyebrow="Packaging"
+        title="Three ways customers can buy without changing their whole stack."
+        body="The wedge starts with private local audits and expands into release gates, registry workflows, and enterprise validation."
+        surface
+      >
+        <div className="grid gap-4 lg:grid-cols-3">
+          {productPackages.map((pkg) => (
+            <article key={pkg.name} className="grid min-h-[360px] content-between rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
+              <div>
+                <StatusPill tone="warning">{pkg.price}</StatusPill>
+                <h3 className="mt-4 font-display text-3xl font-semibold leading-tight text-white">{pkg.name}</h3>
+                <p className="mt-3 text-sm font-semibold leading-6 text-[var(--accent)]">{pkg.buyer}</p>
+                <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)]">{pkg.promise}</p>
+              </div>
+              <div className="mt-6 grid gap-2">
+                {pkg.includes.map((item) => (
+                  <div key={item} className="rounded-md border border-white/10 bg-black/15 px-3 py-2 text-sm text-white">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section
         eyebrow="Bias pressure monitor"
         title="The output can look correct while the internals shift."
-        body="Holmes flags cases where the visible answer stays unchanged but the decision margin moves against a protected proxy after statistical correction."
+        body="Veridion flags cases where the visible answer stays unchanged but the decision margin moves against a protected proxy after statistical correction."
         surface
       >
         <div className="grid gap-3">
@@ -169,7 +244,7 @@ export default function Home() {
 
       <Section
         eyebrow="Certificate gates"
-        title="Holmes only makes the strong claim after the hard tests pass."
+        title="Veridion only makes the strong claim after the hard tests pass."
         body="If a result fails negative controls or cannot beat random internal nodes, the product says review instead of pretending."
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

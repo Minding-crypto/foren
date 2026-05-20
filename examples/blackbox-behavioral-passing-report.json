@@ -1,0 +1,94 @@
+{
+  "analysis_type": "black_box_behavioral_fixture",
+  "fixture_note": "Synthetic complete-protocol fixture for QA/demo of BBEC-0.1 gates. Not a live provider result.",
+  "provider": "demo_blackbox_provider",
+  "model": "demo-credit-api-v1",
+  "prompt": "Applicant: income=85000 loan=120000 delinquency=no employment=5yr. Should we approve or deny? Answer:",
+  "baseline_response": "approve",
+  "summary": {
+    "methods_agree": true,
+    "confidence_grade": "BLACKBOX_BEHAVIORAL_READY"
+  },
+  "shapley_attribution": {
+    "method": "kernel_shap_repeated_query",
+    "n_coalitions": 96,
+    "n_samples_per_coalition": 7,
+    "average_ci_95": 0.08,
+    "overall_reliability": "HIGH",
+    "tokens": [
+      {
+        "token": "delinquency=no",
+        "shapley_value_abs": 0.42,
+        "bootstrap_ci": {
+          "ci_width": 0.07
+        }
+      },
+      {
+        "token": "income=85000",
+        "shapley_value_abs": 0.29,
+        "bootstrap_ci": {
+          "ci_width": 0.09
+        }
+      },
+      {
+        "token": "employment=5yr",
+        "shapley_value_abs": 0.18,
+        "bootstrap_ci": {
+          "ci_width": 0.08
+        }
+      }
+    ],
+    "top_tokens": [
+      {
+        "token": "delinquency=no",
+        "shapley_value_abs": 0.42
+      }
+    ]
+  },
+  "lime_attribution": {
+    "method": "lime_kernel_sensitivity_analysis",
+    "r_squared": 0.91,
+    "primary": {
+      "kernel_width": 0.75,
+      "top_tokens": [
+        {
+          "token": "delinquency=no",
+          "lime_coefficient": 0.39
+        },
+        {
+          "token": "income=85000",
+          "lime_coefficient": 0.24
+        }
+      ]
+    }
+  },
+  "consistency_probing": {
+    "method": "paraphrase_repeated_query",
+    "n_paraphrases": 12,
+    "n_consistent": 11,
+    "consistency_rate": 0.9167
+  },
+  "contrastive_faithfulness": {
+    "method": "contrastive_factor_masking",
+    "verdict": "FAITHFUL",
+    "faithfulness_rate": 0.9
+  },
+  "decision_boundary": {
+    "method": "semantic_counterfactual_boundary",
+    "n_tokens_tested": 6,
+    "n_flips_found": 1,
+    "robustness_score": 0.8333,
+    "min_flip_distance": 2,
+    "robustness": "HIGH"
+  },
+  "conformal_calibration": {
+    "method": "split_conformal_self_consistency",
+    "coverage": 0.92,
+    "target_coverage": 0.9,
+    "calibration_set_size": 80
+  },
+  "anchor": {
+    "full_record_hash_sha256": "demo-fixture-hash-bbec-passing",
+    "timestamp_utc": "2026-05-19T00:00:00Z"
+  }
+}

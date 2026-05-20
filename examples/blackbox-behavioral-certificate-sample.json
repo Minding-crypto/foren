@@ -1,0 +1,84 @@
+{
+  "artifact_id": "blackbox_ab94f40b",
+  "artifact_type": "blackbox_behavioral_evidence_certificate",
+  "standard": {
+    "id": "BBEC-0.1",
+    "claim_scope": "bounded_query_protocol_prompt_family_decision_metric"
+  },
+  "scope": {
+    "model": "gemini-2.5-flash",
+    "provider": "google",
+    "checkpoint_hash": null,
+    "tokenizer_hash": null,
+    "decision_metric": "semantic output similarity over sampled prompt perturbations",
+    "prompt_hash": "stored in source artifact",
+    "prompt_family": "single prompt with paraphrase probes",
+    "claim_boundary": [
+      "provider and model name",
+      "prompt family",
+      "query protocol",
+      "sampled perturbation set",
+      "behavioral decision metric"
+    ]
+  },
+  "decision": {
+    "visible_output": "Paris",
+    "target_family": ["baseline response family"],
+    "opposite_family": ["changed response family"],
+    "clean_margin": null,
+    "corrupt_margin": null,
+    "contrast_gap": null
+  },
+  "certificate": {
+    "status": "REVIEW_REQUIRED",
+    "claim_allowed": false,
+    "bounded_claim": "A black-box behavioral evidence claim is withheld until every required query-protocol gate passes.",
+    "not_certified": [
+      "internal circuits",
+      "neurons or attention heads",
+      "hidden reasoning",
+      "all future prompts",
+      "legal causation"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "query_protocol_repeated",
+      "required": true,
+      "passed": false,
+      "evidence": {
+        "n_coalitions": 32,
+        "n_samples_per_coalition": 3
+      }
+    },
+    {
+      "gate": "contrastive_faithfulness",
+      "required": true,
+      "passed": true,
+      "evidence": {
+        "faithfulness_rate": 1.0
+      }
+    }
+  ],
+  "client_review": {
+    "verdict": "BLACKBOX_REVIEW_REQUIRED",
+    "would_i_buy": "yes_for_diagnostic_screening_not_for_certification",
+    "production_release": "block_or_review",
+    "pilot_value": "medium",
+    "strengths": [
+      "A replayable black-box report artifact exists and is hash-addressed."
+    ],
+    "risks": [
+      "This artifact does not support a high-confidence black-box behavioral claim yet."
+    ],
+    "next_actions": [
+      "Increase coalition samples and repeated calls before trusting token attributions.",
+      "Add a calibration set and conformal/self-consistency threshold before claiming high-confidence black-box reliability."
+    ]
+  },
+  "artifact_hash": {
+    "sha256": "computed from local source artifact",
+    "signature": null,
+    "signature_algorithm": null
+  }
+}

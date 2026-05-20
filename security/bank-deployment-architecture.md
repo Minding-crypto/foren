@@ -1,12 +1,12 @@
-# Holmes Regulated Bank Deployment Architecture
+﻿# Veridion Regulated Bank Deployment Architecture
 
-Holmes should be deployed as a private evidence layer beside the bank's approved
+Veridion should be deployed as a private evidence layer beside the bank's approved
 model environment. The safest default is no prompt, model weight, or regulated
 record leaves the bank-controlled boundary.
 
 ## Recommended Topology
 
-- Control plane: customer-managed or Holmes-hosted metadata plane with no raw
+- Control plane: customer-managed or Veridion-hosted metadata plane with no raw
   prompts or weights.
 - Local runner: VPC or on-prem process that executes the model and analyzer.
 - Artifact vault: customer S3, Azure Blob, GCS, SharePoint, or internal evidence

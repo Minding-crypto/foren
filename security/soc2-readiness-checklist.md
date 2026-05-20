@@ -1,4 +1,4 @@
-# Holmes SOC 2 Readiness Checklist
+﻿# Veridion SOC 2 Readiness Checklist
 
 This is a readiness checklist, not a SOC 2 attestation. A formal SOC 2 report
 requires an independent auditor and an observation period.
@@ -19,7 +19,7 @@ requires an independent auditor and an observation period.
 - Vendor packet: subprocessors, data-flow diagram, retention policy,
   penetration-test plan, vulnerability disclosure, and backup policy.
 
-## Evidence Holmes Should Export
+## Evidence Veridion Should Export
 
 - Audit log CSV or JSONL.
 - Signed report bundle hashes.

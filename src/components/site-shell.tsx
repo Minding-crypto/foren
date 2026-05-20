@@ -6,11 +6,11 @@ import { footerGroups, legalLinks, navItems } from "../lib/site-data"
 export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[rgba(11,13,14,0.9)] backdrop-blur-md">
-      <nav className="section-shell flex h-16 items-center justify-between">
+      <nav className="section-shell flex h-16 min-w-0 items-center justify-between gap-3 overflow-hidden">
         <Link href="/" className="font-display text-lg font-semibold tracking-normal text-white">
-          Holmes
+          Veridion
         </Link>
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="hidden min-w-0 max-w-[60vw] flex-1 items-center justify-end gap-4 overflow-hidden lg:flex">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className="text-sm text-[var(--text-secondary)] hover:text-white">
               {item.label}
@@ -18,10 +18,10 @@ export function SiteHeader() {
           ))}
         </div>
         <Link
-          href="/example"
+          href="/pilot"
           className="rounded-md border border-white/15 px-4 py-2 text-sm font-medium text-[var(--text-primary)] hover:border-white/30 hover:bg-white/[0.04]"
         >
-          View example
+          Start pilot
         </Link>
       </nav>
     </header>
@@ -45,7 +45,7 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_2fr]">
           <div>
             <Link href="/" className="font-display text-2xl font-semibold text-white">
-              Holmes
+              Veridion
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-[var(--text-secondary)]">
               Decision forensics for AI systems: signed evidence, release gates, bias-pressure monitoring,
@@ -85,7 +85,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6">
-          <p className="text-xs text-[var(--text-muted)]">(c) 2026 Holmes. All rights reserved.</p>
+          <p className="text-xs text-[var(--text-muted)]">(c) 2026 Veridion. All rights reserved.</p>
           <p className="text-xs text-[var(--text-muted)]">
             Built for on-prem, private-cloud, and governance-platform workflows.
           </p>
@@ -138,11 +138,11 @@ export function PositioningBanner() {
             The wedge
           </p>
           <h2 className="mt-4 max-w-6xl font-display text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-[56px]">
-            Governance platforms certify around the model. Holmes certifies decision evidence inside the model.
+            Governance platforms certify around the model. Veridion certifies decision evidence inside the model.
           </h2>
           <p className="mt-5 max-w-4xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg">
             Existing AI governance tools prove policies, inventories, approvals, monitoring, and audit workflows.
-            Holmes adds the missing mechanistic proof layer: which internal circuit carried the decision, and whether
+            Veridion adds the missing mechanistic proof layer: which internal circuit carried the decision, and whether
             changing that circuit changed the outcome.
           </p>
         </div>

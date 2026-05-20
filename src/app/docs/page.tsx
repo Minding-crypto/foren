@@ -21,13 +21,33 @@ const gateRequest = `{
   }
 }`
 
+const blackboxReview = `{
+  "report_id": "blackbox_ab94f40b",
+  "min_coalitions": 64,
+  "min_samples_per_coalition": 5,
+  "min_consistency_rate": 0.8,
+  "min_boundary_tests": 3,
+  "require_calibration": true
+}`
+
+const clientReview = `{
+  "verdict": "BUYER_READY_FOR_BOUNDED_OPEN_WEIGHT_GATE",
+  "would_i_buy": "yes_for_pilot_and_controlled_production_gate",
+  "production_release": "allow",
+  "pilot_value": "high",
+  "next_actions": [
+    "Attach this certificate to CI/CD, model registry, and release review.",
+    "Expand validation across the customer's prompt family before broad deployment."
+  ]
+}`
+
 export default function DocsPage() {
   return (
     <PageShell>
       <PageHero
         eyebrow="Product docs"
         title="From one local command to a signed decision-evidence artifact."
-        body="This is the buyer and developer path: run Holmes beside the customer's model, create bounded certificates, store the artifacts, and let policy gates decide what can ship."
+        body="This is the buyer and developer path: run Veridion beside the customer's model, create bounded certificates, store the artifacts, and let policy gates decide what can ship."
       >
         <div className="audit-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -49,7 +69,7 @@ export default function DocsPage() {
 
       <Section
         eyebrow="Workflow"
-        title="How a customer actually uses Holmes."
+        title="How a customer actually uses Veridion."
         body="The first sellable version is a private evidence pack for their high-risk prompt suite. The platform version turns that same evidence into a registry and release gate."
         surface
       >
@@ -91,7 +111,7 @@ export default function DocsPage() {
       <Section
         eyebrow="API"
         title="The API is a runner control surface, not a model-hosting service."
-        body="Holmes should sit beside the model. The API starts jobs, lists artifacts, evaluates release gates, and returns bounded certificate objects."
+        body="Veridion should sit beside the model. The API starts jobs, lists artifacts, evaluates release gates, and returns bounded certificate objects."
         surface
       >
         <div className="grid gap-3 md:grid-cols-2">
@@ -123,6 +143,44 @@ export default function DocsPage() {
             </pre>
           </article>
         </div>
+        <article className="mt-4 min-w-0 rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,0.55fr)_minmax(0,1fr)] lg:items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                Black-box review request
+              </p>
+              <h3 className="mt-3 font-display text-2xl font-semibold leading-tight text-white">
+                Closed APIs get a behavioral certificate, not a circuit claim.
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
+                The stricter black-box route requires repeated sampling, attribution agreement,
+                counterfactual boundary tests, and calibration before Veridion allows a high-confidence claim.
+              </p>
+            </div>
+            <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-4 font-mono text-xs leading-6 text-[var(--text-secondary)]">
+              {blackboxReview}
+            </pre>
+          </div>
+        </article>
+        <article className="mt-4 min-w-0 rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,0.55fr)_minmax(0,1fr)] lg:items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                Client review output
+              </p>
+              <h3 className="mt-3 font-display text-2xl font-semibold leading-tight text-white">
+                The API answers the buyer question directly.
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
+                After a run completes, Veridion returns a conservative verdict: pilot-ready, release-ready,
+                review-only, or blocked. This makes the artifact usable by non-research buyers.
+              </p>
+            </div>
+            <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-4 font-mono text-xs leading-6 text-[var(--text-secondary)]">
+              {clientReview}
+            </pre>
+          </div>
+        </article>
       </Section>
 
       <Section
@@ -154,14 +212,14 @@ export default function DocsPage() {
       <Section
         eyebrow="Evidence schema"
         title="Every certificate should be machine-readable and customer-verifiable."
-        body="The current product schema lives at schemas/holmes-evidence-v0.1.schema.json and describes the stable fields buyers can depend on: scope, decision metric, gate outcomes, policy result, and artifact hash."
+        body="The current product schema lives at schemas/veridion-evidence-v0.1.schema.json and describes the stable fields buyers can depend on: scope, decision metric, gate outcomes, policy result, and artifact hash."
         surface
       >
         <div className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
-          <p className="font-mono text-sm text-[var(--accent)]">schemas/holmes-evidence-v0.1.schema.json</p>
+          <p className="font-mono text-sm text-[var(--accent)]">schemas/veridion-evidence-v0.1.schema.json</p>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--text-secondary)]">
             This is deliberately separate from the private analyzer. Customers receive a stable evidence object.
-            Holmes can improve the math internally without breaking downstream governance workflows.
+            Veridion can improve the math internally without breaking downstream governance workflows.
           </p>
         </div>
       </Section>

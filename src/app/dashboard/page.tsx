@@ -1,4 +1,4 @@
-import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
+﻿import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
 import { dashboardMetrics, dashboardQueue, registryReports } from "../../lib/site-data"
 
 function statusTone(status: string) {
@@ -39,7 +39,7 @@ export default function DashboardPage() {
       <Section
         eyebrow="Executive overview"
         title="See what is safe, what changed, and what needs review."
-        body="The goal is not to force teams into a new ML platform. Holmes sits beside their release process and turns model behavior into reviewable evidence."
+        body="The goal is not to force teams into a new ML platform. Veridion sits beside their release process and turns model behavior into reviewable evidence."
         surface
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -57,7 +57,7 @@ export default function DashboardPage() {
 
       <Section
         eyebrow="Release queue"
-        title="Holmes becomes the pass, block, or review layer."
+        title="Veridion becomes the pass, block, or review layer."
         body="Each row is the kind of artifact a compliance lead, ML owner, or security reviewer can act on immediately."
       >
         <div className="grid gap-3">
@@ -94,7 +94,7 @@ export default function DashboardPage() {
       <Section
         eyebrow="Certificate registry"
         title="Every report is searchable by model, prompt family, proof status, and policy result."
-        body="This is where Holmes starts to look like infrastructure: not a PDF generator, but a registry of signed decision evidence."
+        body="This is where Veridion starts to look like infrastructure: not a PDF generator, but a registry of signed decision evidence."
         surface
       >
         <div className="registry-table">

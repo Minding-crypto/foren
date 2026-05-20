@@ -1,4 +1,4 @@
-{
+﻿{
   "artifact_id": "mechanistic_proof_437bb845",
   "artifact_type": "mechanistic_evidence_certificate",
   "standard": {
@@ -32,7 +32,7 @@
   "certificate": {
     "status": "CERTIFIED_MECHANISTIC_EVIDENCE",
     "claim_allowed": true,
-    "bounded_claim": "For this model checkpoint, prompt family, target decision family, and decision metric, Holmes identified a bounded internal circuit that passed sufficiency, necessity, minimality, and negative-control gates.",
+    "bounded_claim": "For this model checkpoint, prompt family, target decision family, and decision metric, Veridion identified a bounded internal circuit that passed sufficiency, necessity, minimality, and negative-control gates.",
     "not_certified": [
       "all future prompts",
       "all behaviors of the model",
@@ -87,6 +87,23 @@
   "policy_result": {
     "pass": true,
     "reasons": []
+  },
+  "client_review": {
+    "verdict": "BUYER_READY_FOR_BOUNDED_OPEN_WEIGHT_GATE",
+    "would_i_buy": "yes_for_pilot_and_controlled_production_gate",
+    "production_release": "allow",
+    "pilot_value": "high",
+    "strengths": [
+      "A replayable report artifact exists and is hash-addressed.",
+      "The bounded mechanistic claim passed all required certificate gates.",
+      "The configured release policy allows this artifact."
+    ],
+    "risks": [],
+    "next_actions": [
+      "Attach this certificate to CI/CD, model registry, and release review.",
+      "Expand validation across the customer's prompt family before broad deployment.",
+      "Use third-party reruns before making legal-grade claims."
+    ]
   },
   "artifact_hash": {
     "sha256": "example-only",

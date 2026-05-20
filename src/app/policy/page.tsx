@@ -33,12 +33,12 @@ export default function PolicyPage() {
       <PageHero
         eyebrow="Policy as code"
         title="Buyers should define what counts as safe before the model ships."
-        body="A Holmes policy file turns the evidence layer into an enforceable release rule: which models need proof, what controls must pass, and when bias pressure or drift blocks deployment."
+        body="A Veridion policy file turns the evidence layer into an enforceable release rule: which models need proof, what controls must pass, and when bias pressure or drift blocks deployment."
       >
         <div className="audit-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
-              holmes.policy.json
+              veridion.policy.json
             </p>
             <StatusPill tone="warning">blocks releases</StatusPill>
           </div>
@@ -51,7 +51,7 @@ export default function PolicyPage() {
       <Section
         eyebrow="Release rules"
         title="The policy file converts research tests into buyer-friendly pass/fail controls."
-        body="This is how Holmes becomes operational: engineering can automate it, compliance can review it, and executives can understand why a release was blocked."
+        body="This is how Veridion becomes operational: engineering can automate it, compliance can review it, and executives can understand why a release was blocked."
         surface
       >
         <div className="grid gap-4">

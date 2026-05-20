@@ -1,17 +1,17 @@
 import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
 import { integrationTiles, releaseTimeline } from "../../lib/site-data"
 
-const ciSnippet = `name: Holmes Gate
+const ciSnippet = `name: Veridion Gate
 on: [pull_request]
 jobs:
   ai-evidence:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Start Holmes audit
-        run: holmes audit --policy holmes.policy.json --changed-files
+      - name: Start Veridion audit
+        run: veridion audit --policy veridion.policy.json --changed-files
       - name: Block unsafe release
-        run: holmes gate --report latest --fail-on-review`
+        run: veridion gate --report latest --fail-on-review`
 
 const apiSnippet = `POST /v1/audits
 {
@@ -26,8 +26,8 @@ export default function IntegrationsPage() {
     <PageShell>
       <PageHero
         eyebrow="Workflow integration"
-        title="Holmes should fit into the tools customers already use."
-        body="The product does not need buyers to replace governance, MLOps, tracing, or ticketing systems. Holmes supplies the missing decision-forensics evidence and sends the result wherever their workflow already lives."
+        title="Veridion should fit into the tools customers already use."
+        body="The product does not need buyers to replace governance, MLOps, tracing, or ticketing systems. Veridion supplies the missing decision-forensics evidence and sends the result wherever their workflow already lives."
       >
         <div className="audit-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -41,14 +41,14 @@ export default function IntegrationsPage() {
           </h2>
           <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)]">
             ValidMind, ModelOp, Monitaur, MLflow, LangSmith, and internal GRC tools can keep owning workflow.
-            Holmes becomes the evidence engine behind the gate.
+            Veridion becomes the evidence engine behind the gate.
           </p>
         </div>
       </PageHero>
 
       <Section
         eyebrow="Integration map"
-        title="Six plugs make Holmes operational without disrupting current teams."
+        title="Six plugs make Veridion operational without disrupting current teams."
         body="The first customers should not need a platform migration. They need an API, a CI gate, and exportable evidence."
         surface
       >
@@ -70,7 +70,7 @@ export default function IntegrationsPage() {
 
       <Section
         eyebrow="Release flow"
-        title="The customer keeps shipping the same way. Holmes adds an evidence gate."
+        title="The customer keeps shipping the same way. Veridion adds an evidence gate."
         body="Cheap behavioral screens run first. Only risky, fragile, or high-impact open-weight decisions escalate to expensive white-box proof."
       >
         <div className="grid gap-4 md:grid-cols-4">

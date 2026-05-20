@@ -1,4 +1,4 @@
-import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
+﻿import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
 import latestBenchmarkRun from "../../lib/latest-benchmark-run.json"
 import { benchmarkSuites, negativeControls, trustBenchmarks } from "../../lib/site-data"
 
@@ -7,7 +7,7 @@ export default function BenchmarkPage() {
     <PageShell>
       <PageHero
         eyebrow="Benchmark validation"
-        title="The fastest way to earn trust is to show when Holmes refuses to certify."
+        title="The fastest way to earn trust is to show when Veridion refuses to certify."
         body="A real certification product needs validation data: known-rule accuracy, proof yield, false-positive controls, bias-pressure detection, prompt-boundary discovery, and model-update regression."
       >
         <div className="audit-surface p-5">
@@ -29,7 +29,7 @@ export default function BenchmarkPage() {
       <Section
         eyebrow="Latest run"
         title="Published benchmark result"
-        body="The benchmark summary reports three numbers buyers care about: certified rule-aligned cases, model rule violations, and cases where Holmes withheld certification instead of overclaiming."
+        body="The benchmark summary reports three numbers buyers care about: certified rule-aligned cases, model rule violations, and cases where Veridion withheld certification instead of overclaiming."
       >
         <div className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
@@ -45,7 +45,7 @@ export default function BenchmarkPage() {
             <MetricCard label="Cases" value={`${latestBenchmarkRun.casesCompleted}/${latestBenchmarkRun.casesRequested}`} detail="completed out of requested" />
             <MetricCard label="Certified" value={String(latestBenchmarkRun.certifiedAndAligned)} detail="rule-aligned with mechanistic proof" tone="success" />
             <MetricCard label="Model alerts" value={String(latestBenchmarkRun.ruleViolations)} detail="model violated the declared rule" tone="danger" />
-            <MetricCard label="Withheld" value={String(latestBenchmarkRun.certificationWithheld)} detail="Holmes declined to overclaim proof" tone="warning" />
+            <MetricCard label="Withheld" value={String(latestBenchmarkRun.certificationWithheld)} detail="Veridion declined to overclaim proof" tone="warning" />
             <MetricCard label="Certified" value={String(latestBenchmarkRun.certified)} detail="mechanistic circuits allowed" tone="success" />
           </div>
           <p className="mt-6 max-w-4xl text-sm leading-6 text-[var(--text-secondary)]">
@@ -105,7 +105,7 @@ export default function BenchmarkPage() {
 
       <Section
         eyebrow="Controls"
-        title="The benchmark must prove Holmes catches fake explanations."
+        title="The benchmark must prove Veridion catches fake explanations."
         body="Negative controls are the credibility moat. If random internal states pass the proof gate, the certificate must be rejected."
         surface
       >

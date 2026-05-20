@@ -1,6 +1,7 @@
 import { PageHero, PageShell, Section, MetricCard, PositioningBanner, StatusPill } from "../../components/site-shell"
 import {
   apiFlow,
+  blackBoxEvidenceStandard,
   deploymentGateRules,
   integrationModes,
   mechanisticEvidenceStandard,
@@ -29,8 +30,8 @@ export default function PlatformPage() {
     <PageShell>
       <PageHero
         eyebrow="Product architecture"
-        title="Holmes is a runner, registry, dashboard, and deployment gate."
-        body="Run Holmes beside your model, keep sensitive data in your environment, generate signed evidence artifacts, and block risky AI releases before they ship."
+        title="Veridion is a runner, registry, dashboard, and deployment gate."
+        body="Run Veridion beside your model, keep sensitive data in your environment, generate signed evidence artifacts, and block risky AI releases before they ship."
       >
         <div className="audit-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -83,7 +84,7 @@ export default function PlatformPage() {
       <Section
         eyebrow="How customers plug in"
         title="Three integration modes cover startup APIs and locked-down enterprises."
-        body="A customer can call Holmes like an API, run it inside their release pipeline, or keep it fully on-prem beside their open-weight model."
+        body="A customer can call Veridion like an API, run it inside their release pipeline, or keep it fully on-prem beside their open-weight model."
       >
         <div className="grid gap-4 lg:grid-cols-3">
           {integrationModes.map((mode) => (
@@ -106,7 +107,7 @@ export default function PlatformPage() {
       <Section
         eyebrow="Certification standard"
         title="Mechanistic evidence certification means every internal claim has to pass gates."
-        body="Holmes does not certify a model forever. It certifies a bounded evidence claim for a specific model checkpoint, prompt or contrast family, target decision, and decision-margin metric."
+        body="Veridion does not certify a model forever. It certifies a bounded evidence claim for a specific model checkpoint, prompt or contrast family, target decision, and decision-margin metric."
       >
         <div className="grid gap-3">
           {mechanisticEvidenceStandard.map((item, index) => (
@@ -129,9 +130,35 @@ export default function PlatformPage() {
       </Section>
 
       <Section
+        eyebrow="Black-box evidence tier"
+        title="Without weights, Veridion certifies behavior, not hidden circuits."
+        body="For Gemini, Claude, hosted GPT-style APIs, and other pure black-box systems, Veridion uses a stricter query protocol: repeated sampling, attribution cross-checks, paraphrase stability, counterfactual boundary probes, conformal confidence, and artifact integrity. This goes deeper than a surface prompt test, while keeping the claim honest."
+        surface
+      >
+        <div className="grid gap-3">
+          {blackBoxEvidenceStandard.map((item, index) => (
+            <article key={item.gate} className="rounded-md border border-white/10 bg-[var(--bg-card)] p-5">
+              <div className="grid gap-4 md:grid-cols-[64px_minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-start">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md border border-white/10 bg-black/20 font-mono text-sm text-[var(--accent)]">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-white">{item.gate}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">{item.plain}</p>
+                </div>
+                <p className="rounded-md border border-white/10 bg-black/20 p-3 font-mono text-xs leading-6 text-[var(--accent)]">
+                  {item.technical}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section
         eyebrow="Runner API"
         title="The local runner wraps the private analyzer without exposing model weights."
-        body="The control plane sends an audit request. The customer's runner executes Holmes locally, stores artifacts locally or in their bucket, and returns only the certificate metadata they choose to share."
+        body="The control plane sends an audit request. The customer's runner executes Veridion locally, stores artifacts locally or in their bucket, and returns only the certificate metadata they choose to share."
         surface
       >
         <div className="grid gap-4 lg:grid-cols-2">
@@ -168,7 +195,7 @@ export default function PlatformPage() {
       <Section
         eyebrow="Report registry"
         title="Every audit becomes an indexed evidence artifact."
-        body="The report registry is what makes Holmes operational: audit history, comparison, incident reconstruction, and board-ready evidence packets."
+        body="The report registry is what makes Veridion operational: audit history, comparison, incident reconstruction, and board-ready evidence packets."
       >
         <div className="grid gap-3">
           {registryReports.map((report) => (
@@ -190,7 +217,7 @@ export default function PlatformPage() {
 
       <Section
         eyebrow="Deployment gate"
-        title="Holmes becomes the pass/fail layer before a model goes live."
+        title="Veridion becomes the pass/fail layer before a model goes live."
         body="This is how it becomes a product companies renew: every model update, prompt change, RAG refresh, or policy edit must pass evidence gates."
         surface
       >

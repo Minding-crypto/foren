@@ -1,5 +1,5 @@
-import { PageHero, PageShell, Section } from "../../components/site-shell"
-import { mathLayers, papers } from "../../lib/site-data"
+﻿import { PageHero, PageShell, Section } from "../../components/site-shell"
+import { blackBoxEvidenceStandard, mathLayers, papers } from "../../lib/site-data"
 
 export default function ResearchPage() {
   return (
@@ -7,7 +7,7 @@ export default function ResearchPage() {
       <PageHero
         eyebrow="Research foundation"
         title="Built from circuits, sparse features, and proof-style tests."
-        body="Holmes combines behavioral attribution, activation patching, circuit validation, sparse-feature analysis, and negative controls into one decision-forensics workflow."
+        body="Veridion combines behavioral attribution, activation patching, circuit validation, sparse-feature analysis, and negative controls into one decision-forensics workflow."
       >
         <div className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
@@ -30,6 +30,25 @@ export default function ResearchPage() {
               <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{layer.plain}</p>
               <p className="mt-4 rounded-md border border-white/10 bg-black/20 p-3 font-mono text-xs leading-5 text-[var(--accent-2)]">
                 {layer.technical}
+              </p>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="Black-box math"
+        title="The rigorous black-box version is a bounded behavioral certificate."
+        body="A closed API cannot reveal neurons or circuits. Veridion instead makes the query protocol mathematically harder to fool: independent attributions, local fidelity, perturbation stability, counterfactual boundaries, calibration, and negative controls."
+        surface
+      >
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {blackBoxEvidenceStandard.map((item) => (
+            <article key={item.gate} className="rounded-md border border-white/10 bg-[var(--bg-card)] p-6">
+              <h3 className="font-display text-2xl font-semibold leading-tight text-white">{item.gate}</h3>
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{item.plain}</p>
+              <p className="mt-4 rounded-md border border-white/10 bg-black/20 p-3 font-mono text-xs leading-5 text-[var(--accent-2)]">
+                {item.technical}
               </p>
             </article>
           ))}

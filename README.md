@@ -1,14 +1,14 @@
-# Holmes
+# Veridion
 
-Investor landing page for Holmes, the proof layer for AI agents.
+Investor landing page for Veridion, the proof layer for AI agents.
 
-Holmes explains AI-agent and open-weight model decisions with bounded evidence:
+Veridion explains AI-agent and open-weight model decisions with bounded evidence:
 decision margins, controlled ablations, activation patching, circuit tests,
 and cryptographically replayable audit artifacts.
 
 ## Product Shape
 
-Holmes is intended to be more than a public website:
+Veridion is intended to be more than a public website:
 
 - **Website** - investor and buyer-facing explanation.
 - **Local runner API** - optional on-prem service that wraps the private analyzer
@@ -55,7 +55,7 @@ This repo deploys through GitHub Actions.
 1. Open the repository settings on GitHub.
 2. Go to **Pages**.
 3. Set **Source** to **GitHub Actions**.
-4. Run the **Deploy Holmes landing page** workflow, or push to `main`.
+4. Run the **Deploy Veridion landing page** workflow, or push to `main`.
 
 The public URL will be:
 
@@ -63,7 +63,7 @@ The public URL will be:
 
 ## Project Structure
 
-- `src/app/page.tsx` - the Holmes landing page content.
+- `src/app/page.tsx` - the Veridion landing page content.
 - `src/app/platform/page.tsx` - the product architecture, API, report registry,
   and deployment-gate page.
 - `src/app/docs/page.tsx` - product docs, API examples, workflow, and
@@ -79,11 +79,11 @@ The public URL will be:
   suite.
 - `src/app/globals.css` - global styling and theme tokens.
 - `src/app/layout.tsx` - metadata and root layout.
-- `holmes.policy.example.json` - example customer release policy.
-- `examples/holmes-gate.github-actions.yml` - example CI deployment gate.
+- `veridion.policy.example.json` - example customer release policy.
+- `examples/veridion-gate.github-actions.yml` - example CI deployment gate.
 - `examples/audit-request.*.json` - sample runner audit requests.
 - `examples/gate-request.json` - sample deployment-gate request.
-- `schemas/holmes-evidence-v0.1.schema.json` - stable evidence artifact schema.
+- `schemas/veridion-evidence-v0.1.schema.json` - stable evidence artifact schema.
 - `security/*.md` - procurement, bank deployment, legal-claim, third-party
   validation, and black-box coverage scaffolds.
 - `public/one-pagers/*.pdf` - buyer one-pagers for agent safety, hiring bias

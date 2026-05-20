@@ -1,4 +1,4 @@
-import { PageHero, PageShell, Section, MetricCard, ProofGate, StatusPill } from "../../components/site-shell"
+﻿import { PageHero, PageShell, Section, MetricCard, ProofGate, StatusPill } from "../../components/site-shell"
 import { circuitNodes, mathLayers, proofChecks } from "../../lib/site-data"
 
 export default function ProofPage() {
@@ -7,7 +7,7 @@ export default function ProofPage() {
       <PageHero
         eyebrow="Mechanistic proof workflow"
         title="From final answer to tested internal circuit."
-        body="Holmes moves from output behavior to internal intervention tests before allowing a strong mechanistic claim."
+        body="Veridion moves from output behavior to internal intervention tests before allowing a strong mechanistic claim."
       >
         <div className="grid gap-3 sm:grid-cols-2">
           <MetricCard label="Claim type" value="bounded" detail="valid for this model, prompt family, and decision metric" />
@@ -39,7 +39,7 @@ export default function ProofPage() {
       <Section
         eyebrow="Intervention proof"
         title="The circuit has to restore the decision and break the decision."
-        body="A correlation-only explanation is not enough. Holmes tests the internal states by changing the model run itself."
+        body="A correlation-only explanation is not enough. Veridion tests the internal states by changing the model run itself."
         surface
       >
         <div className="grid gap-4 md:grid-cols-4">

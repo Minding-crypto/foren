@@ -1,4 +1,4 @@
-import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
+﻿import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
 import { negativeControls, trustBenchmarks } from "../../lib/site-data"
 
 export default function TrustPage() {
@@ -7,7 +7,7 @@ export default function TrustPage() {
       <PageHero
         eyebrow="Validation and trust"
         title="Every certificate is backed by validation, controls, and conservative failure states."
-        body="Holmes measures known-rule accuracy, proof yield, false-positive controls, and review outcomes before it allows a strong mechanistic claim."
+        body="Veridion measures known-rule accuracy, proof yield, false-positive controls, and review outcomes before it allows a strong mechanistic claim."
       >
         <div className="grid gap-3 sm:grid-cols-2">
           <MetricCard label="Latest smoke run" value="1/1" detail="decision accuracy on a tiny benchmark case" tone="success" />
@@ -38,7 +38,7 @@ export default function TrustPage() {
       <Section
         eyebrow="Negative controls"
         title="No negative-control pass, no causal circuit certificate."
-        body="This is the core trust rule. If random internal nodes can pass the same proof, Holmes must reject the certificate."
+        body="This is the core trust rule. If random internal nodes can pass the same proof, Veridion must reject the certificate."
         surface
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

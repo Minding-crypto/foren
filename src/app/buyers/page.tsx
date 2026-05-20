@@ -1,4 +1,4 @@
-import { PageHero, PageShell, Section, UseCaseLine } from "../../components/site-shell"
+﻿import { PageHero, PageShell, Section, UseCaseLine } from "../../components/site-shell"
 import { agenticLayers, regulations, useCases } from "../../lib/site-data"
 
 export default function BuyersPage() {
@@ -11,7 +11,7 @@ export default function BuyersPage() {
       >
         <div className="rounded-md border border-white/10 bg-white/[0.03] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
-            What Holmes sells
+            What Veridion sells
           </p>
           <p className="mt-3 text-xl font-semibold leading-8 text-white">
             A decision evidence pack: what changed, what mattered, where it appeared internally,
@@ -51,7 +51,7 @@ export default function BuyersPage() {
       <Section
         eyebrow="Agentic AI"
         title="Agents do not just answer. They choose, call tools, and act."
-        body="Holmes can become the evidence layer around agent plans, tool calls, memory use, and policy gates."
+        body="Veridion can become the evidence layer around agent plans, tool calls, memory use, and policy gates."
         surface
       >
         <div className="grid gap-4 md:grid-cols-2">
@@ -67,7 +67,7 @@ export default function BuyersPage() {
 
       <Section
         eyebrow="Regulatory pressure"
-        title="These rules create the pain, even when they do not name Holmes."
+        title="These rules create the pain, even when they do not name Veridion."
         body="They create the buyer need: document, test, monitor, explain, and defend automated decisions."
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

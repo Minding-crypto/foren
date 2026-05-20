@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 
 import { PageHero, PageShell, Section, MetricCard, StatusPill } from "../../components/site-shell"
 import { enterpriseControls, enterpriseRollout, enterpriseTracks, onePagers } from "../../lib/site-data"
@@ -9,7 +9,7 @@ export default function EnterprisePage() {
       <PageHero
         eyebrow="Enterprise readiness"
         title="From investor demo to deployable evidence infrastructure."
-        body="Holmes can start as a self-serve runner and grow into the evidence layer for procurement, model-risk review, policy gates, and third-party validation."
+        body="Veridion can start as a self-serve runner and grow into the evidence layer for procurement, model-risk review, policy gates, and third-party validation."
       >
         <div className="audit-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -54,7 +54,7 @@ export default function EnterprisePage() {
       <Section
         eyebrow="Procurement controls"
         title="What a security, legal, or bank reviewer expects to see."
-        body="These are the controls Holmes should expose in a customer packet before claiming enterprise readiness."
+        body="These are the controls Veridion should expose in a customer packet before claiming enterprise readiness."
       >
         <div className="grid gap-3 md:grid-cols-2">
           {enterpriseControls.map((item) => (

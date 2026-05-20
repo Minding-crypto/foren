@@ -1,7 +1,7 @@
-# Holmes Black-Box Enterprise Coverage
+﻿# Veridion Black-Box Enterprise Coverage
 
 Black-box models can be audited at scale, but they cannot receive the same
-mechanistic certification as open-weight models because Holmes cannot intervene
+mechanistic certification as open-weight models because Veridion cannot intervene
 on internal activations.
 
 ## Supported Black-Box Evidence

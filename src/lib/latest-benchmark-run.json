@@ -1,4 +1,4 @@
-{
+﻿{
   "runId": "mechanistic_benchmark_suite_62d58a6c",
   "status": "BENCHMARK_VALIDATION_REVIEW",
   "model": "Qwen/Qwen2.5-0.5B-Instruct",
@@ -9,7 +9,7 @@
   "certificationWithheld": 6,
   "certified": 9,
   "negativeControlsPassed": 12,
-  "summary": "9 cases were certified and rule-aligned, 5 exposed model rule violations, and 6 had certification withheld. Withholding is intentional: Holmes should not issue mechanistic claims when proof gates do not all pass.",
+  "summary": "9 cases were certified and rule-aligned, 5 exposed model rule violations, and 6 had certification withheld. Withholding is intentional: Veridion should not issue mechanistic claims when proof gates do not all pass.",
   "examples": [
     {
       "caseId": "rule_2_of_3_approve",

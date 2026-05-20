@@ -1,0 +1,30 @@
+﻿name: Veridion Evidence Gate
+
+on:
+  pull_request:
+    paths:
+      - "prompts/**"
+      - "rag/**"
+      - "models/**"
+      - "policies/**"
+      - "agents/**"
+      - "veridion.policy.json"
+
+jobs:
+  veridion-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start Veridion audit
+        run: veridion audit --policy veridion.policy.json --changed-files --output latest-veridion-report.json
+
+      - name: Enforce Veridion gate
+        run: veridion gate --policy veridion.policy.json --report latest-veridion-report.json --fail-on-review
+
+      - name: Upload evidence artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: veridion-evidence
+          path: latest-veridion-report.json

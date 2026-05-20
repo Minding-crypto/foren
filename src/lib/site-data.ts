@@ -3,8 +3,10 @@ export const navItems = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Docs", href: "/docs" },
   { label: "Integrations", href: "/integrations" },
+  { label: "Insights", href: "/insights" },
   { label: "Enterprise", href: "/enterprise" },
   { label: "Benchmark", href: "/benchmark" },
+  { label: "Pilot", href: "/pilot" },
   { label: "Trust", href: "/trust" },
   { label: "Research", href: "/research" }
 ]
@@ -15,8 +17,10 @@ export const footerGroups = [
     links: [
       { label: "Overview", href: "/platform" },
       { label: "Dashboard", href: "/dashboard" },
+      { label: "Evidence insights", href: "/insights" },
       { label: "Developer docs", href: "/docs" },
       { label: "Enterprise", href: "/enterprise" },
+      { label: "Pilot program", href: "/pilot" },
       { label: "Policy gates", href: "/policy" },
       { label: "Integrations", href: "/integrations" }
     ]
@@ -43,9 +47,9 @@ export const footerGroups = [
   {
     title: "Company",
     links: [
-      { label: "Request a demo", href: "/example" },
+      { label: "Start a pilot", href: "/pilot" },
       { label: "Security posture", href: "/trust" },
-      { label: "Contact", href: "mailto:founders@holmes.ai" },
+      { label: "Contact", href: "mailto:founders@veridion.ai" },
       { label: "Privacy", href: "/trust" }
     ]
   }
@@ -60,19 +64,19 @@ export const legalLinks = [
 export const onePagers = [
   {
     title: "AI agent safety",
-    href: "/one-pagers/holmes-ai-agent-safety.pdf",
+    href: "/one-pagers/veridion-ai-agent-safety.pdf",
     detail:
-      "How Holmes audits tool-calling agents before they spend money, send messages, update records, or call external APIs."
+      "How Veridion audits tool-calling agents before they spend money, send messages, update records, or call external APIs."
   },
   {
     title: "Hiring AI bias pressure",
-    href: "/one-pagers/holmes-hiring-bias-pressure.pdf",
+    href: "/one-pagers/veridion-hiring-bias-pressure.pdf",
     detail:
       "Matched-pair proxy testing for cases where the visible output is unchanged but the internal decision margin shifts."
   },
   {
     title: "Open-weight mechanistic certification",
-    href: "/one-pagers/holmes-open-weight-mechanistic-certification.pdf",
+    href: "/one-pagers/veridion-open-weight-mechanistic-certification.pdf",
     detail:
       "The bounded white-box certificate: decision readout, activation patching, sufficiency, necessity, and controls."
   }
@@ -97,21 +101,21 @@ export const enterpriseTracks = [
     title: "Regulated bank deployment",
     status: "private deployment",
     detail:
-      "Banks should run Holmes in their VPC or on-prem next to approved models. The gate produces model-risk evidence without sending PII or weights to Holmes.",
+      "Banks should run Veridion in their VPC or on-prem next to approved models. The gate produces model-risk evidence without sending PII or weights to Veridion.",
     artifact: "VPC runner, artifact vault, MRM review packet, change-control gate"
   },
   {
     title: "Legal-grade certification",
     status: "third-party required",
     detail:
-      "Holmes can produce the evidence bundle, but legal-grade claims need independent validation, locked protocols, expert review, and signed scope boundaries.",
+      "Veridion can produce the evidence bundle, but legal-grade claims need independent validation, locked protocols, expert review, and signed scope boundaries.",
     artifact: "validation protocol, expert packet, signed claim boundary, audit trail"
   },
   {
     title: "Broad black-box coverage",
     status: "behavioral tier",
     detail:
-      "Without weights, Holmes cannot certify internal circuits. It can still run scalable behavioral certificates: matched-pair bias, counterfactual robustness, regression drift, and refusal logs.",
+      "Without weights, Veridion cannot certify internal circuits. It can still run scalable behavioral certificates: matched-pair bias, counterfactual robustness, regression drift, and refusal logs.",
     artifact: "behavioral certificate with confidence tier and explicit non-mechanistic scope"
   }
 ]
@@ -197,7 +201,7 @@ export const mathLayers = [
     step: "03",
     title: "Layer timing",
     plain:
-      "For open-weight models, Holmes records where the decision signal first appears and where it becomes stable.",
+      "For open-weight models, Veridion records where the decision signal first appears and where it becomes stable.",
     technical:
       "Residual stream and logit-lens traces over clean and corrupted prompts"
   },
@@ -205,7 +209,7 @@ export const mathLayers = [
     step: "04",
     title: "Circuit search",
     plain:
-      "Holmes searches for internal layer-token states that carry the decision signal.",
+      "Veridion searches for internal layer-token states that carry the decision signal.",
     technical:
       "Candidate ranking by causal recovery under activation patching"
   },
@@ -317,7 +321,7 @@ export const trustBenchmarks = [
   {
     name: "Circuit certification rate",
     result: "proof yield",
-    detail: "How often Holmes passes sufficiency, necessity, minimality, and negative-control gates."
+    detail: "How often Veridion passes sufficiency, necessity, minimality, and negative-control gates."
   },
   {
     name: "False-positive controls",
@@ -426,7 +430,7 @@ export const wowFindings = [
     value: "-0.407",
     title: "The answer stayed HIRE, but the model became less willing to hire.",
     detail:
-      "A normal output log says nothing changed. Holmes shows the internal hire-vs-reject pressure moved against the proxy group."
+      "A normal output log says nothing changed. Veridion shows the internal hire-vs-reject pressure moved against the proxy group."
   },
   {
     label: "Boundary evidence",
@@ -445,7 +449,7 @@ export const wowFindings = [
   {
     label: "False-proof gate",
     value: "reject",
-    title: "If random nodes can pass, Holmes refuses the certificate.",
+    title: "If random nodes can pass, Veridion refuses the certificate.",
     detail:
       "The product is designed to say REVIEW instead of inventing a beautiful story when the causal evidence is weak."
   }
@@ -458,7 +462,7 @@ export const reportPanels = [
     verdict: "Not enough for audit"
   },
   {
-    title: "What Holmes adds",
+    title: "What Veridion adds",
     items: [
       "Decision-margin pressure",
       "Matched-pair proxy shift",
@@ -619,7 +623,7 @@ export const papers = [
   {
     title: "Qwen-Scope: Turning Sparse Features into Development Tools for Large Language Models",
     year: "2026",
-    why: "Directly relevant to Holmes because it turns Qwen sparse features into practical debugging and steering tools.",
+    why: "Directly relevant to Veridion because it turns Qwen sparse features into practical debugging and steering tools.",
     link: "https://arxiv.org/abs/2605.11887"
   },
   {
@@ -643,7 +647,7 @@ export const papers = [
   {
     title: "Taming OpenClaw: Security Analysis and Mitigation of Autonomous LLM Agent Threats",
     year: "2026",
-    why: "Frames agent safety across initialization, input, inference, decision, and execution, matching Holmes' agent audit story.",
+    why: "Frames agent safety across initialization, input, inference, decision, and execution, matching Veridion' agent audit story.",
     link: "https://arxiv.org/abs/2603.11619"
   },
   {
@@ -667,7 +671,7 @@ export const papers = [
   {
     title: "MIB: A Mechanistic Interpretability Benchmark",
     year: "2025",
-    why: "Supports the Holmes benchmark-validation roadmap: circuit localization and causal-variable localization need measured tests.",
+    why: "Supports the Veridion benchmark-validation roadmap: circuit localization and causal-variable localization need measured tests.",
     link: "https://arxiv.org/abs/2504.13151"
   },
   {
@@ -699,6 +703,36 @@ export const papers = [
     year: "2024",
     why: "A frontier-scale reference for extracting sparse, interpretable features from production-scale models.",
     link: "https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html"
+  },
+  {
+    title: "\"Why Should I Trust You?\" Explaining Any Classifier",
+    year: "2016",
+    why: "The LIME foundation for local black-box surrogate explanations: useful only when local fidelity is measured.",
+    link: "https://arxiv.org/abs/1602.04938"
+  },
+  {
+    title: "A Unified Approach to Interpreting Model Predictions",
+    year: "2017",
+    why: "The SHAP foundation for Shapley-style feature attribution and additive explanation constraints.",
+    link: "https://arxiv.org/abs/1705.07874"
+  },
+  {
+    title: "Anchors: High-Precision Model-Agnostic Explanations",
+    year: "2018",
+    why: "Adds a black-box sufficiency idea: if an anchor rule holds, the prediction should stay stable with high precision.",
+    link: "https://ojs.aaai.org/index.php/AAAI/article/view/11491"
+  },
+  {
+    title: "SelfCheckGPT",
+    year: "2023",
+    why: "Shows how sampling consistency can detect fragile or non-factual black-box LLM outputs without logprob or weight access.",
+    link: "https://arxiv.org/abs/2303.08896"
+  },
+  {
+    title: "ConU: Conformal Uncertainty in Large Language Models",
+    year: "2024",
+    why: "Supports the black-box confidence tier: self-consistency can be calibrated with conformal coverage guarantees.",
+    link: "https://arxiv.org/abs/2407.00499"
   }
 ]
 
@@ -739,18 +773,18 @@ export const integrationModes = [
     command: "POST /v1/audits",
     bestFor: "AI vendors and platform teams that want to trigger audits from their app or backend.",
     detail:
-      "The customer sends a prompt, model metadata, decision target, and audit mode. Holmes returns a job ID and stores the signed artifact."
+      "The customer sends a prompt, model metadata, decision target, and audit mode. Veridion returns a job ID and stores the signed artifact."
   },
   {
     name: "CI/CD gate",
-    command: "holmes gate --policy holmes.policy.json",
+    command: "veridion gate --policy veridion.policy.json",
     bestFor: "Enterprises that need every model or prompt update to pass governance checks before release.",
     detail:
       "A deployment pipeline fails if a required certificate is missing, negative controls fail, or drift exceeds policy thresholds."
   },
   {
     name: "On-prem runner",
-    command: "python backend/holmes_runner_api.py --host 127.0.0.1 --port 8787",
+    command: "veridion runner --host 127.0.0.1 --port 8787",
     bestFor: "Banks, healthcare, insurance, and hiring vendors that cannot upload weights or regulated prompts.",
     detail:
       "The runner wraps the analyzer locally. A control plane can request certificate metadata without receiving model weights."
@@ -768,7 +802,7 @@ export const registryReports = [
     proofDetail: "Necessary and sufficient",
     proof: "CERTIFIED_NECESSARY_SUFFICIENT",
     controls: "PASS",
-    margin: "8.2519 → -0.5788",
+    margin: "8.2519 to -0.5788",
     reportPath: "reports/forensicai_fb62a5fe.txt"
   },
   {
@@ -830,7 +864,7 @@ export const mechanisticEvidenceStandard = [
   {
     gate: "Open-weight access",
     plain:
-      "The certificate only applies when Holmes can inspect the exact model tensors used for the decision.",
+      "The certificate only applies when Veridion can inspect the exact model tensors used for the decision.",
     technical: "same deployed checkpoint + tokenizer + deterministic decision readout"
   },
   {
@@ -842,7 +876,7 @@ export const mechanisticEvidenceStandard = [
   {
     gate: "Clean/corrupt contrast",
     plain:
-      "Holmes needs a controlled evidence change that moves the model across the decision boundary.",
+      "Veridion needs a controlled evidence change that moves the model across the decision boundary.",
     technical: "clean margin, corrupt margin, and contrast gap exceed threshold"
   },
   {
@@ -871,6 +905,51 @@ export const mechanisticEvidenceStandard = [
   }
 ]
 
+export const blackBoxEvidenceStandard = [
+  {
+    gate: "Repeated query protocol",
+    plain:
+      "A single API answer is too weak. Veridion samples coalitions, paraphrases, and repeated calls so the result has measured variance.",
+    technical: "n_coalitions >= 64 and repeated samples per coalition >= 5 by default"
+  },
+  {
+    gate: "Attribution cross-check",
+    plain:
+      "Shapley and LIME must point to compatible evidence. If they disagree, Veridion refuses a single-factor story.",
+    technical: "SHAP/LIME top factor agreement or rank agreement, with confidence intervals"
+  },
+  {
+    gate: "Local surrogate fidelity",
+    plain:
+      "The simple explanation model must actually match the black-box model near this prompt.",
+    technical: "local R² / fidelity score >= policy threshold"
+  },
+  {
+    gate: "Paraphrase stability",
+    plain:
+      "The answer should survive harmless wording changes if the explanation is robust.",
+    technical: "self-consistency and semantic similarity over prompt variants"
+  },
+  {
+    gate: "Counterfactual boundary",
+    plain:
+      "Veridion searches for the smallest meaningful input change that flips or weakens the answer.",
+    technical: "semantic flip probes, minimum tested boundary count, robustness score"
+  },
+  {
+    gate: "Conformal confidence",
+    plain:
+      "For high-confidence black-box claims, sampled uncertainty must be calibrated on a held-out prompt set.",
+    technical: "self-consistency score + conformal coverage criterion"
+  },
+  {
+    gate: "Artifact integrity",
+    plain:
+      "Every black-box run is anchored so customers can replay the exact query protocol and compare versions.",
+    technical: "hash, timestamp, prompt family, provider/model, query settings, thresholds"
+  }
+]
+
 export const apiFlow = [
   {
     method: "POST",
@@ -881,6 +960,11 @@ export const apiFlow = [
     method: "GET",
     endpoint: "/v1/audits/{id}",
     purpose: "Poll status while the runner executes the local analyzer."
+  },
+  {
+    method: "GET",
+    endpoint: "/v1/audits/{id}/result",
+    purpose: "Return the job, candidate report, certificate, policy result, and buyer-readable review."
   },
   {
     method: "GET",
@@ -896,6 +980,26 @@ export const apiFlow = [
     method: "POST",
     endpoint: "/v1/certificates/mechanistic-evidence",
     purpose: "Return the formal bounded mechanistic evidence certificate for a report."
+  },
+  {
+    method: "POST",
+    endpoint: "/v1/certificates/blackbox-behavioral",
+    purpose: "Return the formal black-box behavioral evidence certificate for a sampled query-protocol report."
+  },
+  {
+    method: "POST",
+    endpoint: "/v1/client-review",
+    purpose: "Translate the certificate into a pilot, release, or review verdict."
+  },
+  {
+    method: "POST",
+    endpoint: "/v1/blackbox-review",
+    purpose: "Translate a black-box report into a behavioral monitoring verdict without claiming internal mechanisms."
+  },
+  {
+    method: "POST",
+    endpoint: "/v1/insights",
+    purpose: "Translate certificate math into buyer-ready findings, release decisions, risks, and remediation steps."
   }
 ]
 
@@ -905,7 +1009,7 @@ export const policyRules = [
     path: "mechanistic.claim_allowed",
     threshold: "true for high-risk open-weight decisions",
     buyerMeaning:
-      "A release cannot ship unless Holmes verified the bounded internal circuit claim."
+      "A release cannot ship unless Veridion verified the bounded internal circuit claim."
   },
   {
     rule: "Reject weak controls",
@@ -1003,7 +1107,7 @@ export const integrationTiles = [
     name: "GitHub Actions",
     type: "CI/CD gate",
     detail:
-      "Run Holmes on pull requests that change prompts, model IDs, RAG corpora, policies, or agent tool permissions.",
+      "Run Veridion on pull requests that change prompts, model IDs, RAG corpora, policies, or agent tool permissions.",
     artifact: "release pass/fail, report URL, blocking reasons"
   },
   {
@@ -1024,7 +1128,7 @@ export const integrationTiles = [
     name: "ValidMind / ModelOp / Monitaur",
     type: "governance add-on",
     detail:
-      "Push Holmes certificate status into existing governance workflows instead of forcing a rip-and-replace migration.",
+      "Push Veridion certificate status into existing governance workflows instead of forcing a rip-and-replace migration.",
     artifact: "mechanistic evidence attachment"
   },
   {
@@ -1049,7 +1153,7 @@ export const benchmarkSuites = [
     coverage: "loan, fraud, hiring, insurance, triage",
     metric: "expected output + decision margin",
     why:
-      "Proves the model follows the declared rule before Holmes attempts a mechanistic certificate."
+      "Proves the model follows the declared rule before Veridion attempts a mechanistic certificate."
   },
   {
     suite: "Prompt boundary finder",
@@ -1070,14 +1174,14 @@ export const benchmarkSuites = [
     coverage: "open-weight model checkpoints and prompt families",
     metric: "sufficiency, necessity, minimality, controls",
     why:
-      "Measures how often Holmes can certify a bounded internal circuit and when it refuses."
+      "Measures how often Veridion can certify a bounded internal circuit and when it refuses."
   },
   {
     suite: "Negative-control audit",
     coverage: "random circuits, wrong targets, shuffled labels",
     metric: "false-positive rate",
     why:
-      "Builds customer trust by proving Holmes rejects fake mechanistic stories."
+      "Builds customer trust by proving Veridion rejects fake mechanistic stories."
   },
   {
     suite: "Model update regression",
@@ -1096,7 +1200,7 @@ export const releaseTimeline = [
   },
   {
     step: "2",
-    title: "Holmes runs cheap screens",
+    title: "Veridion runs cheap screens",
     detail: "Black-box behavior, known-rule tests, boundary distance, and bias pressure run first."
   },
   {
@@ -1113,25 +1217,239 @@ export const releaseTimeline = [
 
 export const productPackages = [
   {
-    name: "Holmes Local",
+    name: "Veridion Local",
     buyer: "AI startups using open-weight or Ollama/Hugging Face models",
     promise: "Run audits privately, generate JSON/PDF artifacts, and learn which high-risk prompts are certifiable.",
     includes: ["local runner", "mechanistic proof mode", "bias pressure screen", "signed local artifacts"],
     price: "$299-$999/mo pilot target"
   },
   {
-    name: "Holmes Team",
+    name: "Veridion Team",
     buyer: "Teams with model, prompt, RAG, or agent releases",
     promise: "Add a report registry, release gates, benchmark suites, and model-update regression checks.",
     includes: ["dashboard", "registry", "CI/CD gate", "prompt boundary finder", "benchmark validation"],
     price: "$2k-$8k/mo target"
   },
   {
-    name: "Holmes Enterprise",
+    name: "Veridion Enterprise",
     buyer: "Regulated AI teams, banks, HR tech, insurance, healthcare, and governance platforms",
-    promise: "Deploy inside a VPC or on-prem environment and attach Holmes evidence to existing governance workflows.",
+    promise: "Deploy inside a VPC or on-prem environment and attach Veridion evidence to existing governance workflows.",
     includes: ["private deployment", "SSO/SAML path", "artifact vault", "procurement packet", "third-party validation plan"],
     price: "$25k-$150k/yr target"
+  }
+]
+
+export const pilotOutcomes = [
+  {
+    label: "First 48 hours",
+    value: "Runner live",
+    detail: "Install the private runner, connect one local model, and run a known-rule smoke suite."
+  },
+  {
+    label: "First week",
+    value: "20 cases",
+    detail: "Audit a focused prompt family for decision margins, bias pressure, drift, and proof eligibility."
+  },
+  {
+    label: "Pilot close",
+    value: "Evidence pack",
+    detail: "Deliver a signed artifact bundle, executive readout, release policy, and next-step integration plan."
+  }
+]
+
+export const pilotDeliverables = [
+  {
+    title: "Private runner setup",
+    detail:
+      "Veridion runs beside the customer's model. Their prompts, weights, and raw reports can stay inside their environment.",
+    proof: "local API health check plus first report registry entry"
+  },
+  {
+    title: "Prompt-family evidence suite",
+    detail:
+      "The customer picks a real high-risk workflow: hiring, lending, fraud, claims, support agents, or compliance review.",
+    proof: "20-50 prompt cases with expected decision families and policy thresholds"
+  },
+  {
+    title: "Bias pressure and boundary scan",
+    detail:
+      "Veridion searches for same-output hidden margin shifts, fragile prompts, contradictory instruction failures, and near flips.",
+    proof: "ranked risk list with FDR-adjusted proxy findings where applicable"
+  },
+  {
+    title: "White-box proof attempts",
+    detail:
+      "For open-weight cases that pass the setup gates, Veridion tests layer timing, circuit sufficiency, necessity, minimality, and controls.",
+    proof: "certificate, review, or refusal with exact failed gates"
+  },
+  {
+    title: "Release gate policy",
+    detail:
+      "A simple policy file turns the evidence into an operational decision: allow, block, or review.",
+    proof: "CI-ready policy thresholds and example gate response"
+  },
+  {
+    title: "Executive buyer packet",
+    detail:
+      "The final packet explains what was proven, what was not proven, and what the customer should do before production.",
+    proof: "board-style summary plus signed JSON artifact plus audit trail"
+  }
+]
+
+export const pilotIdealCustomers = [
+  {
+    title: "Open-weight AI startups",
+    pain:
+      "They sell AI decisions but cannot show buyers what happened inside the model when a risky answer was produced.",
+    close:
+      "Veridion gives them a private evidence layer they can show during enterprise sales and security review."
+  },
+  {
+    title: "Agentic AI products",
+    pain:
+      "Agents choose tools, call APIs, and update records. A chat transcript is not enough after a bad action.",
+    close:
+      "Veridion turns high-risk agent actions into decision evidence with release gates and incident replay."
+  },
+  {
+    title: "Hiring, lending, insurance, and healthcare AI",
+    pain:
+      "These teams face bias, stability, and audit questions before customers, regulators, or legal teams trust them.",
+    close:
+      "Veridion checks visible decisions, hidden pressure shifts, and model-update drift before deployment."
+  },
+  {
+    title: "AI governance platforms",
+    pain:
+      "They own inventory and policy workflows, but usually do not inspect the internal mechanism of open-weight models.",
+    close:
+      "Veridion becomes the mechanistic evidence attachment for their existing governance stack."
+  }
+]
+
+export const pilotAcceptanceCriteria = [
+  {
+    gate: "Evidence generated",
+    threshold: "At least 20 customer-relevant cases produce replayable report artifacts."
+  },
+  {
+    gate: "Policy decision",
+    threshold: "Each case is labeled allow, review, block, or not certifiable with a reason."
+  },
+  {
+    gate: "Controls included",
+    threshold: "Strong claims require negative controls, minimality checks, and failed random-node controls."
+  },
+  {
+    gate: "Buyer handoff",
+    threshold: "The customer receives dashboard records, JSON evidence, PDF summary, and integration commands."
+  }
+]
+
+export const salesProofPoints = [
+  {
+    claim: "Not another governance checklist",
+    evidence:
+      "Veridion produces model-specific evidence: decision margins, intervention tests, circuit gates, proxy pressure, and release decisions."
+  },
+  {
+    claim: "Private by default",
+    evidence:
+      "A customer can run the analyzer next to their own model without uploading weights or raw regulated prompts."
+  },
+  {
+    claim: "Strong claims are bounded",
+    evidence:
+      "If Veridion cannot prove a circuit, it says review or not certifiable instead of inventing a mechanistic story."
+  },
+  {
+    claim: "Operational, not academic",
+    evidence:
+      "The output is a gate, registry entry, and buyer packet that compliance, engineering, and sales teams can use."
+  }
+]
+
+export const insightCapabilities = [
+  {
+    title: "Release decision",
+    buyerQuestion: "Can this ship?",
+    answer:
+      "Veridion converts gates into allow, review, block, or waiting-for-report so teams do not have to interpret raw tensors."
+  },
+  {
+    title: "Claim boundary",
+    buyerQuestion: "What can we safely say?",
+    answer:
+      "The insight layer states exactly what is certified and what is not: internal circuits for open-weight proofs, behavioral gates for black-box reports."
+  },
+  {
+    title: "Hidden risk",
+    buyerQuestion: "What did the normal dashboard miss?",
+    answer:
+      "Veridion surfaces hidden pressure shifts, unstable paraphrases, weak contrast cases, missing calibration, and random-control failures."
+  },
+  {
+    title: "Remediation",
+    buyerQuestion: "What do we fix next?",
+    answer:
+      "Every failed gate becomes an action: more repeated queries, stronger clean/corrupt contrast, calibration set, boundary probes, or prompt-family expansion."
+  }
+]
+
+export const insightDemoCards = [
+  {
+    label: "Passing black-box packet",
+    status: "ALLOW BEHAVIORAL GATE",
+    headline: "The closed model passed repeated-query, attribution, paraphrase, boundary, calibration, and artifact gates.",
+    details: [
+      "Top factor matched across Shapley and LIME: delinquency=no.",
+      "Paraphrase consistency: 0.9167.",
+      "Faithfulness rate: 0.90.",
+      "Counterfactual boundary robustness: 0.8333."
+    ],
+    action: "Attach this bounded behavioral certificate to monitoring, release review, and incident response."
+  },
+  {
+    label: "Weak black-box packet",
+    status: "REVIEW REQUIRED",
+    headline: "The report had useful signals but Veridion refused certification.",
+    details: [
+      "Shapley and LIME agreed on France.",
+      "Repeated query protocol was too small.",
+      "Paraphrase consistency was only 0.60.",
+      "Calibration and boundary tests were missing."
+    ],
+    action: "Increase samples, add calibration, add boundary probes, then rerun."
+  },
+  {
+    label: "Open-weight packet",
+    status: "CERTIFY OR REFUSE",
+    headline: "For local models, Veridion can escalate from behavioral evidence to activation-intervention evidence.",
+    details: [
+      "Decision margin is measured directly.",
+      "Layer timing shows when the signal appears.",
+      "Patch tests measure sufficiency.",
+      "Ablation and negative controls protect against false circuits."
+    ],
+    action: "Use the insight layer to decide whether the artifact is release-ready, diagnostic-only, or blocked."
+  }
+]
+
+export const insightCommands = [
+  {
+    title: "Passing behavioral insight",
+    command: "veridion insights examples/evidence-insights-blackbox-passing.json",
+    result: "deployment_decision = allow_behavioral_gate"
+  },
+  {
+    title: "Review-required behavioral insight",
+    command: "veridion insights examples/evidence-insights-blackbox-review.json",
+    result: "deployment_decision = review_required with exact failed gates"
+  },
+  {
+    title: "Direct report insight",
+    command: "veridion insights-report blackbox_3334dd74",
+    result: "returns the buyer summary, hidden risks, fixes, and artifact hash"
   }
 ]
 
@@ -1139,7 +1457,7 @@ export const customerWorkflow = [
   {
     step: "1",
     title: "Connect model",
-    detail: "Point Holmes at a local/open-weight model, Ollama endpoint, or black-box API tier."
+    detail: "Point Veridion at a local/open-weight model, Ollama endpoint, or black-box API tier."
   },
   {
     step: "2",
@@ -1159,7 +1477,7 @@ export const customerWorkflow = [
   {
     step: "5",
     title: "Issue or withhold certificate",
-    detail: "Holmes creates a signed artifact only inside the bounded claim scope; weak proof becomes review, not marketing copy."
+    detail: "Veridion creates a signed artifact only inside the bounded claim scope; weak proof becomes review, not marketing copy."
   },
   {
     step: "6",
@@ -1176,27 +1494,47 @@ export const runnerCommands = [
   },
   {
     title: "Start private runner API",
-    command: "python backend/holmes_runner_api.py --host 127.0.0.1 --port 8787",
+    command: "veridion runner --host 127.0.0.1 --port 8787",
     detail: "Runs the local API wrapper around the private analyzer. Weights and prompts stay local."
   },
   {
     title: "Start a mechanistic proof audit",
-    command: "python scripts/holmesctl.py audit examples/audit-request.mechanistic.json",
+    command: "veridion audit examples/audit-request.mechanistic.json",
     detail: "Submits a white-box proof job to the runner and returns an audit job ID."
   },
   {
     title: "List reports",
-    command: "python scripts/holmesctl.py reports",
+    command: "veridion reports",
     detail: "Shows the report registry from the local reports folder."
   },
   {
     title: "Evaluate a release gate",
-    command: "python scripts/holmesctl.py gate examples/gate-request.json",
+    command: "veridion gate examples/gate-request.json",
     detail: "Checks whether a report passes the configured release policy."
   },
   {
     title: "Export a certificate object",
-    command: "python scripts/holmesctl.py certificate mechanistic_proof_437bb845",
+    command: "veridion certificate mechanistic_proof_437bb845",
     detail: "Returns the bounded mechanistic evidence certificate JSON for a report."
+  },
+  {
+    title: "Export a black-box behavioral certificate",
+    command: "veridion blackbox-certificate blackbox_ab94f40b",
+    detail: "Returns the bounded behavioral evidence certificate for a black-box API report."
+  },
+  {
+    title: "Demo a passing black-box evidence gate",
+    command: "veridion blackbox-review examples/blackbox-behavioral-passing-review.json",
+    detail: "Shows the BBEC-0.1 positive path when every required behavioral gate is present."
+  },
+  {
+    title: "Ask the buyer-readiness question",
+    command: "veridion review examples/client-review-request.json",
+    detail: "Returns whether the artifact is pilot-ready, release-ready, or review-only."
+  },
+  {
+    title: "Review black-box readiness",
+    command: "veridion blackbox-review examples/blackbox-review-request.json",
+    detail: "Shows the honest refusal path when a black-box report is useful but not certifiable yet."
   }
 ]

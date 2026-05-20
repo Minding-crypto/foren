@@ -1,0 +1,13 @@
+{
+  "evidence_type": "blackbox",
+  "report_path": "examples/blackbox-behavioral-passing-report.json",
+  "min_coalitions": 64,
+  "min_samples_per_coalition": 5,
+  "min_lime_r2": 0.75,
+  "max_average_ci_95": 0.15,
+  "min_consistency_rate": 0.8,
+  "min_faithfulness_rate": 0.8,
+  "min_boundary_tests": 3,
+  "min_boundary_robustness": 0.8,
+  "require_calibration": true
+}
